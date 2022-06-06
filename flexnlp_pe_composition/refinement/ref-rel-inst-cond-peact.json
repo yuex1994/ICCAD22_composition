@@ -1,0 +1,96 @@
+{
+  "instructions": [
+    // Config Instructions
+    {
+      "instruction" : "PE0_CONFIG_ACT_MNGR",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "PE0_CONFIG_ACT_VECTOR_0_15",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "PE0_CONFIG_ACT_VECTOR_16_31",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "PE0_ACT_STORE_BUFFER",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "PE0_act_child_initiate",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "PE0_act_child_op_load_zero",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "PE0_act_child_op_load",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "PE0_act_child_op_store",
+      "ready bound" : 1
+    },
+    {
+      "instruction" : "PE0_act_child_op_inpe",
+      "ready bound" : 1
+    },
+    {
+      "instruction" : "PE0_act_child_op_outgb",
+      "ready bound" : 1
+    },
+    {
+      "instruction" : "PE0_act_child_op_copy",
+      "ready bound" : 1
+
+    },
+    {
+      "instruction" : "PE0_act_child_op_eadd",
+      "ready bound" : 1
+    },
+    {
+      "instruction" : "PE0_act_child_op_emul",
+      "ready bound" : 1
+    },
+    {
+      "instruction" : "PE0_act_child_op_sigm",
+      "ready bound" : 1
+    },
+    {
+      "instruction" : "PE0_act_child_op_tanh",
+      "ready bound" : 1
+    },
+    {
+      "instruction" : "PE0_act_child_op_relu",
+      "ready bound" : 1
+    },
+    {
+      "instruction" : "PE0_act_child_op_onex",
+      "ready bound" : 1
+    },
+    {
+      "instruction" : "PE0_act_child_reg_store",
+      "ready bound" : 1
+    },
+    {
+      "instruction" : "PE0_act_child_out_sent",
+      "ready bound" : 1
+    },
+    {
+      "instruction" : "PE0_act_child_done_sent",
+      "ready bound" : 1
+    }
+  ],
+  
+  "global invariants": []
+
+}

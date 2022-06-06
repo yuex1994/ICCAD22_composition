@@ -1,0 +1,154 @@
+{
+    "models": { "ILA":"m0" , "VERILOG": "m1" },
+  
+    "state mapping": {
+        // Act_Config
+        "pe0_act_mngr_is_valid"     :   "act_config_is_valid",
+        "pe0_act_mngr_is_zero_first":   "act_config_is_zero_first",
+        "pe0_act_mngr_adpfloat_bias":   "act_config_adpfloat_bias",
+        "pe0_act_mngr_num_inst":        "act_config_num_inst",
+        "pe0_act_mngr_num_output":      "act_config_num_output",
+        "pe0_act_mngr_buffer_addr_base":"act_config_buffer_addr_base",
+        "pe0_act_mngr_output_addr_base":"act_config_output_addr_base",
+        "pe0_act_instruction_counter":  "act_config_inst_counter",
+        "pe0_act_output_counter"     :  "act_config_output_counter",
+
+        "act_vector_0_15_Inst_0" :  "m1.run.act_config_inst_regs_0_sva_dfm_5",
+        "act_vector_0_15_Inst_1" :  "m1.run.act_config_inst_regs_1_sva_dfm_5",
+        "act_vector_0_15_Inst_2" :  "m1.run.act_config_inst_regs_2_sva_dfm_5",
+        "act_vector_0_15_Inst_3" :  "m1.run.act_config_inst_regs_3_sva_dfm_5",
+        "act_vector_0_15_Inst_4" :  "m1.run.act_config_inst_regs_4_sva_dfm_5",
+        "act_vector_0_15_Inst_5" :  "m1.run.act_config_inst_regs_5_sva_dfm_5",
+        "act_vector_0_15_Inst_6" :  "m1.run.act_config_inst_regs_6_sva_dfm_5",
+        "act_vector_0_15_Inst_7" :  "m1.run.act_config_inst_regs_7_sva_dfm_5",
+        "act_vector_0_15_Inst_8" :  "m1.run.act_config_inst_regs_8_sva_dfm_5",
+        "act_vector_0_15_Inst_9" :  "m1.run.act_config_inst_regs_9_sva_dfm_5",
+        "act_vector_0_15_Inst_10" : "m1.run.act_config_inst_regs_10_sva_dfm_5",
+        "act_vector_0_15_Inst_11" : "m1.run.act_config_inst_regs_11_sva_dfm_5",
+        "act_vector_0_15_Inst_12" : "m1.run.act_config_inst_regs_12_sva_dfm_5",
+        "act_vector_0_15_Inst_13" : "m1.run.act_config_inst_regs_13_sva_dfm_5",
+        "act_vector_0_15_Inst_14" : "m1.run.act_config_inst_regs_14_sva_dfm_5",
+        "act_vector_0_15_Inst_15" : "m1.run.act_config_inst_regs_15_sva_dfm_5",
+
+        "act_vector_16_31_Inst_0" :  "m1.run.act_config_inst_regs_16_sva_dfm_6",
+        "act_vector_16_31_Inst_1" :  "m1.run.act_config_inst_regs_17_sva_dfm_6",
+        "act_vector_16_31_Inst_2" :  "m1.run.act_config_inst_regs_18_sva_dfm_6",
+        "act_vector_16_31_Inst_3" :  "m1.run.act_config_inst_regs_19_sva_dfm_6",
+        "act_vector_16_31_Inst_4" :  "m1.run.act_config_inst_regs_20_sva_dfm_6",
+        "act_vector_16_31_Inst_5" :  "m1.run.act_config_inst_regs_21_sva_dfm_6",
+        "act_vector_16_31_Inst_6" :  "m1.run.act_config_inst_regs_22_sva_dfm_6",
+        "act_vector_16_31_Inst_7" :  "m1.run.act_config_inst_regs_23_sva_dfm_6",
+        "act_vector_16_31_Inst_8" :  "m1.run.act_config_inst_regs_24_sva_dfm_6",
+        "act_vector_16_31_Inst_9" :  "m1.run.act_config_inst_regs_25_sva_dfm_6",
+        "act_vector_16_31_Inst_10" : "m1.run.act_config_inst_regs_26_sva_dfm_6",
+        "act_vector_16_31_Inst_11" : "m1.run.act_config_inst_regs_27_sva_dfm_6",
+        "act_vector_16_31_Inst_12" : "m1.run.act_config_inst_regs_28_sva_dfm_6",
+        "act_vector_16_31_Inst_13" : "m1.run.act_config_inst_regs_29_sva_dfm_6",
+        "act_vector_16_31_Inst_14" : "m1.run.act_config_inst_regs_30_sva_dfm_6",
+        "act_vector_16_31_Inst_15" : "m1.run.act_config_inst_regs_31_sva_dfm_6",
+
+        // Internal State
+        "pe0_act_state" : "state",
+        "pe0_act_is_start_reg": "is_start", 
+        "pe0_act_buffer" : "**MEM**act_buffer",
+
+
+        // Register File
+        "PE0_act_reg_temp_0" :null,
+        "PE0_act_reg_temp_1" :null,
+        "PE0_act_reg_temp_2" :null,
+        "PE0_act_reg_temp_3" :null,
+        "PE0_act_reg_temp_4" :null,
+        "PE0_act_reg_temp_5" :null,
+        "PE0_act_reg_temp_6" :null,
+        "PE0_act_reg_temp_7" :null,
+        "PE0_act_reg_temp_8" :null,
+        "PE0_act_reg_temp_9" :null,
+        "PE0_act_reg_temp_10" :null,
+        "PE0_act_reg_temp_11" :null,
+        "PE0_act_reg_temp_12" :null,
+        "PE0_act_reg_temp_13" :null,
+        "PE0_act_reg_temp_14" :null,
+        "PE0_act_reg_temp_15" :null,
+        "pe0_act_regs_0" : "**MEM**act_regs0",
+        "pe0_act_regs_1" : "**MEM**act_regs1",
+        "pe0_act_regs_2" : "**MEM**act_regs2",
+        "pe0_act_regs_3" : "**MEM**act_regs3",
+
+        "act_port_ready" : "act_port_rdy",
+        "rva_in_ready" : "rva_in_rdy",
+
+        "output_port_data" : "m1.output_port_msg[127:0]",
+        "output_port_addr" : "m1.output_port_msg[137:130]",
+        "output_port_valid": "output_port_val",
+
+        "act_start_ready" : "start_rdy",
+        "done": "done_msg",
+        "done_valid": "done_val"
+    },
+
+    "value-holder":{
+    },
+
+    "verilog-inline-monitors" : {
+    },
+
+    "interface mapping": {
+       
+        "clk" : "**CLOCK**",
+        "rst" : "**NRESET**",
+
+        "start_val": "act_start_valid",
+        "start_rdy": "**SO**",
+        "start_msg" : "act_start",
+
+        "act_port_val": "pe0_act_reg_port_valid",
+        "act_port_rdy" : "**SO**",
+        "act_port_msg": "**KEEP**",
+
+        "rva_in_val"  : "rva_in_valid",
+        "rva_in_rdy"  : "**SO**",
+        "rva_in_msg"  : "**KEEP**",
+        
+        "rva_out_val" : "**SO**",
+        "rva_out_rdy" : "**KEEP**",
+        "rva_out_msg" : "**SO**",
+
+        "output_port_val": "**SO**",
+        "output_port_rdy" : "output_port_ready",
+        "output_port_msg": "**SO**",
+
+        "done_val" : "**SO**", 
+        "done_rdy" : "done_ready",
+        "done_msg" : "**SO**"
+    },
+  
+    "mapping control":[
+        "m1.rva_in_msg == {m0.axi_rw, m0.wstrb, m0.addr, m0.data_in_15,m0.data_in_14,m0.data_in_13,m0.data_in_12,m0.data_in_11,m0.data_in_10, m0.data_in_9,m0.data_in_8,m0.data_in_7,m0.data_in_6,m0.data_in_5,m0.data_in_4,m0.data_in_3,m0.data_in_2,m0.data_in_1,m0.data_in_0}",
+        "m1.act_port_msg == {m0.PE0_core_act_vector_15,m0.PE0_core_act_vector_14,m0.PE0_core_act_vector_13,m0.PE0_core_act_vector_12,m0.PE0_core_act_vector_11,m0.PE0_core_act_vector_10, m0.PE0_core_act_vector_9,m0.PE0_core_act_vector_8,m0.PE0_core_act_vector_7,m0.PE0_core_act_vector_6,m0.PE0_core_act_vector_5,m0.PE0_core_act_vector_4,m0.PE0_core_act_vector_3,m0.PE0_core_act_vector_2,m0.PE0_core_act_vector_1,m0.PE0_core_act_vector_0}"
+        // "m1.ch_0_downstream.baf.r_ptr_binary_r ==  __MEM_inpput_buffer_0_raddr",
+        // "m1.ch_0_downstream.baf.w_ptr_binary_r ==  __MEM_input_buffer_0_waddr",
+        // "m1.ch_0_downstream.baf.w_data_i == __MEM_buffer_0_wdata",
+        // "m1.ch_0_downstream.baf.r_data_o == mi0.ila_rdata"
+    ],
+
+    "annotation": {
+        // "memory-ports" : {
+        //   "buffer.wen":"m1.ch_0_downstream.baf.w_enq_i && (__CYCLE_CNT__ == 3) "
+        // }
+    },
+  
+    "assumptions" : [
+        // Need to Change manager_num to 2
+        "m1.act_config_num_inst >= 1",
+        "m1.act_config_num_inst <= 32",
+        "m1.act_config_num_output >= 1",
+        "m1.rva_out_rdy == 1"
+        //"m1.PECore_PECoreRun_inst.pe_manager_num_input_0_sva >= 1 & m1.PECore_PECoreRun_inst.pe_manager_num_input_1_sva >= 1"
+    ],
+
+    "composition checks" : [
+        
+    ]
+  
+}

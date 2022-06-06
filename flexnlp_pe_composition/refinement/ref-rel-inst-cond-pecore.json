@@ -1,0 +1,75 @@
+{
+  "instructions": [
+    // Config Instructions
+    {
+      "instruction" : "PE0_CONFIG_CLUSTER_TABLE_FIRST",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "PE0_CONFIG_CLUSTER_TABLE_SECOND",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "PE0_CONFIG_MEM_MNGR_FIRST",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "PE0_CONFIG_MEM_MNGR_SECOND",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "PE0_CONFIG_RNN_LAYER_SIZING",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "PE0_CORE_STORE_WEIGHT_BUFFER",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "PE0_CORE_STORE_INPUT_BUFFER",
+      "ready bound" : 1
+    },
+
+    // Normal Instructions
+    {
+      "instruction" : "PE0_core_read_gb",
+      "ready bound" : 1
+    },
+    {
+      "instruction" : "PE0_core_is_start",
+      "ready bound" : 4
+    },
+    {
+      "instruction" : "PE0_core_prep",
+      "ready bound" : 4
+    },
+    {
+      "instruction" : "PE0_core_mac",
+      "ready bound" : 4,
+      "start condition" : ["$decode$", "m1.PECore_PECoreRun_inst.fsm_output[1] == 1"]
+
+    },
+    {
+      "instruction" : "PE0_core_bias",
+      "ready bound" : 4
+    },
+    {
+      "instruction" : "PE0_core_out",
+      "ready bound" : 3,
+      "start condition" : ["$decode$", "m1.PECore_PECoreRun_inst.fsm_output[1] == 1"]
+    },
+    {
+      "instruction" : "PE0_core_out_sent",
+      "ready bound" : 1
+    }
+  ],
+  
+  "global invariants": []
+
+}

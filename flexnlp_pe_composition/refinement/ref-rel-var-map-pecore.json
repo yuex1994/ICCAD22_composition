@@ -1,0 +1,183 @@
+{
+    "models": { "ILA":"m0" , "VERILOG": "m1" },
+  
+    "state mapping": {
+        // PE_Manager_0
+        "cluster_table_first_Entry_0": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_0_0_sva_dfm_4",
+        "cluster_table_first_Entry_1": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_0_1_sva_dfm_4",
+        "cluster_table_first_Entry_2": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_0_2_sva_dfm_4", 
+        "cluster_table_first_Entry_3": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_0_3_sva_dfm_4",
+        "cluster_table_first_Entry_4": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_0_4_sva_dfm_4",
+        "cluster_table_first_Entry_5": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_0_5_sva_dfm_4",
+        "cluster_table_first_Entry_6": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_0_6_sva_dfm_4",
+        "cluster_table_first_Entry_7": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_0_7_sva_dfm_4",
+        "cluster_table_first_Entry_8": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_0_8_sva_dfm_4",
+        "cluster_table_first_Entry_9": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_0_9_sva_dfm_4",
+        "cluster_table_first_Entry_10": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_0_10_sva_dfm_4",
+        "cluster_table_first_Entry_11": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_0_11_sva_dfm_4",
+        "cluster_table_first_Entry_12": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_0_12_sva_dfm_4",
+        "cluster_table_first_Entry_13": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_0_13_sva_dfm_4",
+        "cluster_table_first_Entry_14": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_0_14_sva_dfm_4",
+        "cluster_table_first_Entry_15": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_0_15_sva_dfm_4",
+
+        "pe0_mem_mngr_first_zero_active":       "m1.PECore_PECoreRun_inst.pe_manager_zero_active_0_sva",
+        "pe0_mem_mngr_first_adpfloat_bias_w":   "m1.PECore_PECoreRun_inst.pe_manager_adplfloat_bias_weight_0_sva",
+        "pe0_mem_mngr_first_adpfloat_bias_b":   "m1.PECore_PECoreRun_inst.pe_manager_adplfloat_bias_bias_0_sva",
+        "pe0_mem_mngr_first_adpfloat_bias_i":   "m1.PECore_PECoreRun_inst.pe_manager_adplfloat_bias_input_0_sva",
+        "pe0_mem_mngr_first_num_input":         "m1.PECore_PECoreRun_inst.pe_manager_num_input_0_sva",
+        "pe0_mem_mngr_first_base_weight":       "m1.PECore_PECoreRun_inst.pe_manager_base_weight_0_sva",
+        "pe0_mem_mngr_first_base_bias":         "m1.PECore_PECoreRun_inst.pe_manager_base_bias_0_sva",
+        "pe0_mem_mngr_first_base_input":        "m1.PECore_PECoreRun_inst.pe_manager_base_input_0_sva",
+
+        // PE_Manager_1
+        "cluster_table_second_Entry_0": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_1_0_sva_dfm_4",
+        "cluster_table_second_Entry_1": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_1_1_sva_dfm_4",
+        "cluster_table_second_Entry_2": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_1_2_sva_dfm_4", 
+        "cluster_table_second_Entry_3": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_1_3_sva_dfm_4",
+        "cluster_table_second_Entry_4": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_1_4_sva_dfm_4",
+        "cluster_table_second_Entry_5": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_1_5_sva_dfm_4",
+        "cluster_table_second_Entry_6": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_1_6_sva_dfm_4",
+        "cluster_table_second_Entry_7": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_1_7_sva_dfm_4",
+        "cluster_table_second_Entry_8": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_1_8_sva_dfm_4",
+        "cluster_table_second_Entry_9": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_1_9_sva_dfm_4",
+        "cluster_table_second_Entry_10": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_1_10_sva_dfm_4",
+        "cluster_table_second_Entry_11": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_1_11_sva_dfm_4",
+        "cluster_table_second_Entry_12": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_1_12_sva_dfm_4",
+        "cluster_table_second_Entry_13": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_1_13_sva_dfm_4",
+        "cluster_table_second_Entry_14": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_1_14_sva_dfm_4",
+        "cluster_table_second_Entry_15": "m1.PECore_PECoreRun_inst.pe_manager_cluster_lut_data_1_15_sva_dfm_4",
+
+        "pe0_mem_mngr_second_zero_active":       "m1.PECore_PECoreRun_inst.pe_manager_zero_active_1_sva",
+        "pe0_mem_mngr_second_adpfloat_bias_w":   "m1.PECore_PECoreRun_inst.pe_manager_adplfloat_bias_weight_1_sva",
+        "pe0_mem_mngr_second_adpfloat_bias_b":   "m1.PECore_PECoreRun_inst.pe_manager_adplfloat_bias_bias_1_sva",
+        "pe0_mem_mngr_second_adpfloat_bias_i":   "m1.PECore_PECoreRun_inst.pe_manager_adplfloat_bias_input_1_sva",
+        "pe0_mem_mngr_second_num_input":         "m1.PECore_PECoreRun_inst.pe_manager_num_input_1_sva",
+        "pe0_mem_mngr_second_base_weight":       "m1.PECore_PECoreRun_inst.pe_manager_base_weight_1_sva",
+        "pe0_mem_mngr_second_base_bias":         "m1.PECore_PECoreRun_inst.pe_manager_base_bias_1_sva",
+        "pe0_mem_mngr_second_base_input":        "m1.PECore_PECoreRun_inst.pe_manager_base_input_1_sva",
+
+        // PE_Config
+        "pe0_rnn_layer_sizing_is_valid"     :   "pe_config_is_valid",
+        "pe0_rnn_layer_sizing_is_zero_first":   "pe_config_is_zero_first",
+        "pe0_rnn_layer_sizing_is_cluster":      "pe_config_is_cluster",
+        "pe0_rnn_layer_sizing_is_bias":         "pe_config_is_bias",
+        "pe0_rnn_layer_sizing_num_manager":     "pe_config_num_manager",
+        "pe0_rnn_layer_sizing_num_output":      "pe_config_num_output",
+        "pe0_core_manager_cntr":                "pe_config_manager_counter",
+        "pe0_core_input_counter" :              "pe_config_input_counter",
+        "pe0_core_output_counter":              "pe_config_output_counter",
+
+        // Internal State
+        "pe0_core_state" : "state",
+        "pe0_core_is_start": "is_start",
+
+        "PE0_core_accum_vector_0" :"m1.PECore_PECoreRun_inst.act_port_reg_data_0_sva",
+        "PE0_core_accum_vector_1" :"m1.PECore_PECoreRun_inst.act_port_reg_data_1_sva",
+        "PE0_core_accum_vector_2" :"m1.PECore_PECoreRun_inst.accum_vector_data_2_sva",
+        "PE0_core_accum_vector_3" :"m1.PECore_PECoreRun_inst.accum_vector_data_3_sva",
+        "PE0_core_accum_vector_4" :"m1.PECore_PECoreRun_inst.accum_vector_data_4_sva",
+        "PE0_core_accum_vector_5" :"m1.PECore_PECoreRun_inst.accum_vector_data_5_sva",
+        "PE0_core_accum_vector_6" :"m1.PECore_PECoreRun_inst.accum_vector_data_6_sva",
+        "PE0_core_accum_vector_7" :"m1.PECore_PECoreRun_inst.accum_vector_data_7_sva",
+        "PE0_core_accum_vector_8" :"m1.PECore_PECoreRun_inst.accum_vector_data_8_sva",
+        "PE0_core_accum_vector_9" :"m1.PECore_PECoreRun_inst.accum_vector_data_9_sva",
+        "PE0_core_accum_vector_10" :"m1.PECore_PECoreRun_inst.act_port_reg_data_10_sva",
+        "PE0_core_accum_vector_11" :"m1.PECore_PECoreRun_inst.act_port_reg_data_11_sva",
+        "PE0_core_accum_vector_12" :"m1.PECore_PECoreRun_inst.accum_vector_data_12_sva",
+        "PE0_core_accum_vector_13" :"m1.PECore_PECoreRun_inst.accum_vector_data_13_sva",
+        "PE0_core_accum_vector_14" :"m1.PECore_PECoreRun_inst.accum_vector_data_14_sva",
+        "PE0_core_accum_vector_15" :"m1.PECore_PECoreRun_inst.accum_vector_data_15_sva",
+
+        // Output
+        "PE0_core_act_vector_0"  : "act_port_msg[19:0]",
+        "PE0_core_act_vector_1"  : "act_port_msg[39:20]",
+        "PE0_core_act_vector_2"  : "act_port_msg[59:40]",
+        "PE0_core_act_vector_3"  : "act_port_msg[79:60]",
+        "PE0_core_act_vector_4"  : "act_port_msg[99:80]",
+        "PE0_core_act_vector_5"  : "act_port_msg[119:100]",
+        "PE0_core_act_vector_6"  : "act_port_msg[139:120]",
+        "PE0_core_act_vector_7"  : "act_port_msg[159:140]",
+        "PE0_core_act_vector_8"  : "act_port_msg[179:160]",
+        "PE0_core_act_vector_9"  : "act_port_msg[199:180]",
+        "PE0_core_act_vector_10"  : "act_port_msg[219:200]",
+        "PE0_core_act_vector_11"  : "act_port_msg[239:220]",
+        "PE0_core_act_vector_12"  : "act_port_msg[259:240]",
+        "PE0_core_act_vector_13"  : "act_port_msg[279:260]",
+        "PE0_core_act_vector_14"  : "act_port_msg[299:280]",
+        "PE0_core_act_vector_15"  : "act_port_msg[319:300]",
+
+        "pe0_act_reg_port_valid" : "act_port_val",
+        "rva_in_ready" : "rva_in_rdy",
+        "pe_start_ready" : "start_rdy",
+        "input_port_ready" : "input_port_rdy",
+
+        "pe0_core_weight_buffer" : "**MEM**weight_buffer",
+        "pe0_core_input_buffer" : "**MEM**input_buffer"
+    },
+
+    "value-holder":{
+    },
+
+    "verilog-inline-monitors" : {
+    },
+
+    "interface mapping": {
+       
+        "clk" : "**CLOCK**",
+        "rst" : "**NRESET**",
+
+        "start_val": "pe_start_valid",
+        "start_rdy": "**SO**",
+        "start_msg" : "pe_start",
+
+        "input_port_val": "input_port_valid",
+        "input_port_rdy" : "**SO**",
+        "input_port_msg": "**KEEP**",
+
+        "rva_in_val"  : "rva_in_valid",
+        "rva_in_rdy"  : "**SO**",
+        "rva_in_msg"  : "**KEEP**",
+        
+        "rva_out_val" : "**SO**",
+        "rva_out_rdy" : "**KEEP**",
+        "rva_out_msg" : "**SO**",
+
+        "act_port_val": "**SO**",
+        "act_port_rdy" : "act_port_ready",
+        "act_port_msg": "**SO**",
+
+        "SC_SRAM_CONFIG": "**KEEP**"
+    },
+  
+    "mapping control":[
+        "m1.input_port_msg == {m0.input_port_index, m0.input_port_addr, m0.input_port_data}",
+        "m1.rva_in_msg == {m0.axi_rw, m0.wstrb, m0.addr, m0.data_in_15,m0.data_in_14,m0.data_in_13,m0.data_in_12,m0.data_in_11,m0.data_in_10, m0.data_in_9,m0.data_in_8,m0.data_in_7,m0.data_in_6,m0.data_in_5,m0.data_in_4,m0.data_in_3,m0.data_in_2,m0.data_in_1,m0.data_in_0}"
+        // "m1.ch_0_downstream.baf.r_ptr_binary_r ==  __MEM_inpput_buffer_0_raddr",
+        // "m1.ch_0_downstream.baf.w_ptr_binary_r ==  __MEM_input_buffer_0_waddr",
+        // "m1.ch_0_downstream.baf.w_data_i == __MEM_buffer_0_wdata",
+        // "m1.ch_0_downstream.baf.r_data_o == mi0.ila_rdata"
+    ],
+
+    "annotation": {
+        // "memory-ports" : {
+        //   "buffer.wen":"m1.ch_0_downstream.baf.w_enq_i && (__CYCLE_CNT__ == 3) "
+        // }
+    },
+  
+    "assumptions" : [
+        // Need to Change manager_num to 2
+        "m1.pe_config_num_manager == 1",
+        "m1.pe_config_num_output >= 1",
+        "m1.rva_out_rdy == 1",
+        "m1.PECore_PECoreRun_inst.pe_manager_num_input_0_sva >= 1 & m1.PECore_PECoreRun_inst.pe_manager_num_input_1_sva >= 1",
+        // verified invariants 10s
+        "m1.state != 0 |-> (m1.pe_config_manager_counter != 0 || m1.PECore_PECoreRun_inst.pe_config_input_counter_sva <= (m1.PECore_PECoreRun_inst.pe_manager_num_input_0_sva - 1))",
+        "m1.state != 0 |-> (m1.pe_config_manager_counter != 1 || m1.PECore_PECoreRun_inst.pe_config_input_counter_sva <= (m1.PECore_PECoreRun_inst.pe_manager_num_input_1_sva - 1))",
+        "m1.pe_config_num_output - 1 >= m1.pe_config_output_counter"
+    ],
+
+    "composition checks" : [
+        
+    ]
+  
+}
