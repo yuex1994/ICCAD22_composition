@@ -1,0 +1,107 @@
+{ "instructions": [
+    { 
+      "instruction" : "alu_add",
+      "rtl_decode" : "((m1.alu_op == 1) && ((m1.wr_sfr == 1) || (m1.wr_sfr == 2) || (m1.wr_sfr == 3) || (m1.wr_sfr == 0)))",
+      "type" : "output generate"
+    },
+    { 
+      "instruction" : "alu_da",
+      "rtl_decode" : "((m1.alu_op == 5) && ((m1.wr_sfr == 1) || (m1.wr_sfr == 2) || (m1.wr_sfr == 3) || (m1.wr_sfr == 0)))",
+      "type" : "output generate"
+    },
+    { 
+      "instruction" : "alu_sub",
+      "rtl_decode" : "((m1.alu_op == 2) && ((m1.wr_sfr == 1) || (m1.wr_sfr == 2) || (m1.wr_sfr == 3) || (m1.wr_sfr == 0)))",
+      "type" : "output generate"
+    },
+    { 
+      "instruction" : "alu_and",
+      "rtl_decode" : "((m1.alu_op == 7) && ((m1.wr_sfr == 1) || (m1.wr_sfr == 2) || (m1.wr_sfr == 3) || (m1.wr_sfr == 0)))",
+      "type" : "output generate"
+    },     
+    { 
+      "instruction" : "alu_or",
+      "rtl_decode" : "((m1.alu_op == 9) && ((m1.wr_sfr == 1) || (m1.wr_sfr == 2) || (m1.wr_sfr == 3) || (m1.wr_sfr == 0)))",
+      "type" : "output generate"
+    },
+    { 
+      "instruction" : "alu_not",
+      "rtl_decode" : "((m1.alu_op == 6) && ((m1.wr_sfr == 1) || (m1.wr_sfr == 2) || (m1.wr_sfr == 3) || (m1.wr_sfr == 0)))",
+      "type" : "output generate"
+    },         
+    { 
+      "instruction" : "alu_inc",
+      "rtl_decode" : "((m1.alu_op == 14) && ((m1.wr_sfr == 1) || (m1.wr_sfr == 2) || (m1.wr_sfr == 3) || (m1.wr_sfr == 0)))",
+      "type" : "output generate"
+    },     
+    { 
+      "instruction" : "alu_xor",
+      "rtl_decode" : "((m1.alu_op == 8) && ((m1.wr_sfr == 1) || (m1.wr_sfr == 2) || (m1.wr_sfr == 3) || (m1.wr_sfr == 0)))",
+      "type" : "output generate"
+    },             
+    { 
+      "instruction" : "alu_xch",
+      "rtl_decode" : "((m1.alu_op == 15) && ((m1.wr_sfr == 1) || (m1.wr_sfr == 2) || (m1.wr_sfr == 3) || (m1.wr_sfr == 0)))",
+      "type" : "output generate"
+    },     
+    { 
+      "instruction" : "alu_rl",
+      "rtl_decode" : "((m1.alu_op == 10) && ((m1.wr_sfr == 1) || (m1.wr_sfr == 2) || (m1.wr_sfr == 3) || (m1.wr_sfr == 0)))",
+      "type" : "output generate"
+    },         
+    { 
+      "instruction" : "alu_rlc",
+      "rtl_decode" : "((m1.alu_op == 11) && ((m1.wr_sfr == 1) || (m1.wr_sfr == 2) || (m1.wr_sfr == 3) || (m1.wr_sfr == 0)))",
+      "type" : "output generate"
+    },     
+    { 
+      "instruction" : "alu_rr",
+      "rtl_decode" : "((m1.alu_op == 12) && ((m1.wr_sfr == 1) || (m1.wr_sfr == 2) || (m1.wr_sfr == 3) || (m1.wr_sfr == 0)))",
+      "type" : "output generate"
+    },     
+    { 
+      "instruction" : "alu_rrc",
+      "rtl_decode" : "((m1.alu_op == 13) && ((m1.wr_sfr == 1) || (m1.wr_sfr == 2) || (m1.wr_sfr == 3) || (m1.wr_sfr == 0)))",
+      "type" : "output generate"
+    },             
+    { 
+      "instruction" : "alu_mul",
+      "rtl_decode" : "((m1.alu_op == 3) && ((m1.wr_sfr == 1) || (m1.wr_sfr == 2) || (m1.wr_sfr == 3) || (m1.wr_sfr == 0)))",
+      "type" : "output generate"
+    },     
+    { 
+      "instruction" : "alu_div",
+      "rtl_decode" : "((m1.alu_op == 4) && ((m1.wr_sfr == 1) || (m1.wr_sfr == 2) || (m1.wr_sfr == 3) || (m1.wr_sfr == 0)))",
+      "type" : "output generate"
+    },         
+
+    {
+      "instruction" : "no_wr",
+      "rtl_decode" : "(m1.wr_o == 0)",
+      "type" : "output irrelevant"
+    },
+    { 
+      "instruction" : "read_data",
+      "rtl_decode" : "(m1.alu_op == 0)",
+      "type" : "output irrelevant"      
+    },
+    {
+      "instruction" : "wr_sfr",
+      "rtl_decode" : "(m1.wr_o && (m1.wr_addr[7] == 1) && (m1.wr_ind == 0))",
+      "type" : "output generate"      
+    },
+    {
+      "instruction" : "wr_ram",
+      "rtl_decode" : "(m1.wr_o && m1.wr_ind)",
+      "type" : "output generate"      
+    },
+    {
+      "instruction" : "wr_sfr_ram",
+      "rtl_decode" : "(m1.wr_o && (m1.wr_addr[7] == 0) && (m1.wr_ind == 0))",
+      "type" : "output generate"      
+    }            
+  ],
+  "rtl_valid" : "1",
+  "ila_valid" : "1",
+  "eq_payload" : "__m42__"
+}

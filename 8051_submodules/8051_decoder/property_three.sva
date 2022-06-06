@@ -1,0 +1,1 @@
+{((__START__) && (!(m1.state == 0))) ##1 ((__STARTED__) && (!(m0.state == 0))) |-> !(m1.state == 0) until __IEND__}

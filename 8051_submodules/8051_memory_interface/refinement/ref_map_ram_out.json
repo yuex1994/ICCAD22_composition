@@ -1,0 +1,68 @@
+{  "instructions":
+  [ 
+    { 
+      "instruction" : "xram_0_irom_0",
+      "rtl_decode" : "((m1.dack_i == 1) && (m1.mem_act == 4))",
+      "type" : "handshake" 
+    },
+    { 
+      "instruction" : "xram_0_irom_1",
+      "rtl_decode" : "((m1.dack_i == 1) && (m1.mem_act !=4) && (m1.imem_wait == 1))",
+      "type" : "handshake"
+    },
+    { 
+      "instruction" : "xram_0_irom_2",
+      "rtl_decode" : "((m1.dack_i == 1) && (m1.mem_act != 4) && (m1.imem_wait == 0))",
+      "type" : "handshake"
+    },
+    { 
+      "instruction" : "xram_1_irom_0",
+      "rtl_decode" : "((m1.dack_i == 0) && (m1.dstb_o == 0) && ((m1.mem_act == 0) || (m1.mem_act == 2) || (m1.mem_act == 1) || (m1.mem_act == 3)) && (m1.mem_act == 4))",
+      "type" : "output generate" 
+    },
+    { 
+      "instruction" : "xram_1_irom_1",
+      "rtl_decode" : "((m1.dack_i == 0) && (m1.dstb_o == 0) && ((m1.mem_act == 0) || (m1.mem_act == 2) || (m1.mem_act == 1) || (m1.mem_act == 3)) && (m1.mem_act != 4) && (m1.imem_wait == 1))",
+      "type" : "output generate" 
+    },
+    { 
+      "instruction" : "xram_1_irom_2",
+      "rtl_decode" : "((m1.dack_i == 0) && (m1.dstb_o == 0) && ((m1.mem_act == 0) || (m1.mem_act == 2) || (m1.mem_act == 1) || (m1.mem_act == 3)) && (m1.mem_act != 4) && (m1.imem_wait == 0))",    
+      "type" : "output generate" 
+    },
+    { 
+      "instruction" : "xram_2_irom_0",
+      "rtl_decode" : "((m1.dack_i == 0) && ((m1.dstb_o == 1) || (m1.mem_act == 4) || (m1.mem_act == 5) || (m1.mem_act == 6) || (m1.mem_act == 7)) && (m1.mem_act == 4))",
+      "type" : "output irrelevant"
+    },
+    { 
+      "instruction" : "xram_2_irom_1",
+      "rtl_decode" : "((m1.dack_i == 0) && ((m1.dstb_o == 1) || (m1.mem_act == 4) || (m1.mem_act == 5) || (m1.mem_act == 6) || (m1.mem_act == 7)) && (m1.mem_act != 4) &&(m1.imem_wait == 1))",      
+      "type" : "output irrelevant"
+    },
+    { 
+      "instruction" : "xram_2_irom_2",
+      "rtl_decode" : "((m1.dack_i == 0) && ((m1.dstb_o == 1) || (m1.mem_act == 4) || (m1.mem_act == 5) || (m1.mem_act == 6) || (m1.mem_act == 7)) && (m1.mem_act != 4) &&(m1.imem_wait == 0))",
+      "type" : "output irrelevant"
+    },
+    { 
+      "instruction" : "load_inst",
+      "rtl_decode" : "1",
+      "type" : "output irrelevant"
+    },
+    { 
+      "instruction" : "new_inst",
+      "rtl_decode" : "1",
+      "type" : "output irrelevant"
+    },
+    { 
+      "instruction" : "multi_cycle",
+      "rtl_decode" : "1",
+      "type" : "output irrelevant" 
+    }
+  ],
+  "rtl_valid" : "dstb_o",
+  "ila_valid" : "dstb_o",
+  "eq_payload" : "__m21__"
+  
+}

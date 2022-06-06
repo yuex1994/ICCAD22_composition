@@ -1,0 +1,35 @@
+{
+    "instructions": [
+      {
+        "instruction" : "process",
+        "rtl_decode" : "((m1.mem_wait == 0) && (m1.wait_data == 0) && (m1.state == 0))",
+        "type" : "output generate"
+      },
+      {
+        "instruction" : "stall",
+        "rtl_decode" : "((m1.mem_wait == 1) || (m0.wait_data == 1))",
+        "type" : "output irrelevant"
+      },
+      {
+        "instruction" : "step3",
+        "rtl_decode" : "((m1.mem_wait == 0) && (m1.wait_data == 0) && (m1.state == 3))",
+        "type" : "output generate"
+      },
+      {
+        "instruction" : "step2",
+        "rtl_decode" : "((m1.mem_wait == 0) && (m1.wait_data == 0) && (m1.state == 2))",
+        "type" : "output generate"
+      },
+      {
+        "instruction" : "step1",
+        "rtl_decode" : "((m1.mem_wait == 0) && (m1.wait_data == 0) && (m1.state == 1))",
+        "type" : "output generate"
+      }
+    ],
+    "rtl_valid" : "1",
+    "ila_valid" : "1",
+    "rtl_ready" : "(m1.state == 0)",
+    "ila_ready" : "(m0.state == 0)",
+    "eq_payload" : "__m13__"
+  }
+  

@@ -1,0 +1,16 @@
+{ 
+  "instructions":
+  [
+    { "instruction" : "process",
+      "ready bound" : 1 },
+    { "instruction" : "stall",
+      "ready bound" : 1 },
+    { "instruction" : "step_2",
+      "ready signal" : "m1.state == 1" },
+    { "instruction" : "step_1",
+      "ready signal" : "m1.state == 0" },
+    { "instruction" : "step_0",
+      "ready bound" : 1 }
+  ],
+  "global invariants" : []
+}

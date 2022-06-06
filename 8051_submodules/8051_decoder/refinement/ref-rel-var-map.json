@@ -1,0 +1,29 @@
+{
+  "models" : { "ILA" : "m0", "VERILOG" : "m1"},
+  "state mapping" : {
+    "state" : "m1.state",
+    "op" : "m1.op",
+    "mem_act" : "m1.mem_act",
+    "ram_wr_sel" : "m1.ram_wr_sel",
+    "wr" : "m1.wr",
+    "ram_rd_sel_r": "m1.ram_rd_sel_r",
+    "cy_sel" : "m1.cy_sel",
+    "src_sel1" : "m1.src_sel1",
+    "src_sel2" : "m1.src_sel2",
+    "src_sel3" : "m1.src_sel3",
+    "alu_op" : "m1.alu_op",
+    "psw" : "m1.psw_set",
+    "wr_sfr" : "m1.wr_sfr" 
+  },
+  "interface mapping" : {
+    "rst"  : "**RESET**",
+    "clk"  : "**CLOCK**",
+    "eq"  : "eq",
+    "mem_wait" : "mem_wait",
+    "wait_data" : "wait_data",
+    "op_in" : "op_in"
+  }, 
+  "mapping control" : [ 
+    "m1.mem_wait == m1.wait_data"
+  ]
+}
