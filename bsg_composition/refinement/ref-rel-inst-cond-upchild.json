@@ -1,0 +1,34 @@
+  {
+    "instructions": [
+      {
+        "instruction" : "Output0",
+        "start condition" : ["$decode$", "m1.ch_0_oddr_phy.ready_o == 1"],
+        "ready signal" : "m1.io_valid_r_o[0]",
+        "max bound": 10
+      },
+
+      {
+        "instruction" : "Output1_Send0",
+        "ready signal" : "#valid_check# & __CYCLE_CNT__ > 4'd1",
+        "max bound": 10
+      },
+
+      {
+        "instruction" : "Output2_Send1",
+        "ready bound" : 2
+      },
+
+      {
+        "instruction" : "Output3_Send2",
+        "ready bound" : 2
+      },
+
+      {
+        "instruction" : "Send3",
+        "ready bound" : 2
+      }
+    ],
+    
+    "global invariants": []
+  
+  }

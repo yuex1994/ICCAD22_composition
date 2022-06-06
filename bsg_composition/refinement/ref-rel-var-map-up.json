@@ -1,0 +1,118 @@
+{
+    "models": { "ILA":"m0" , "VERILOG": "m1" },
+  
+    "state mapping": {
+        "io_valid_out"    : "m1.io_valid_r_o[0]",
+        "io_data_out_ch0" : "m1.io_data_r_o[7:0]",
+        "io_data_out_ch1" : "m1.io_data_r_o[15:8]",
+
+        "data_cycle_0"    : "#data0#",
+        "data_cycle_1"    : "m1.out_piso.data_o",
+        "child_valid"     : "~m1.out_piso.ready_and_o",
+        "sent_cnt"        : "#sent_counter#",
+        "finish_cnt"      : "#finish_counter#"
+    },
+
+    "value-holder" : {
+        "data0" :{
+          "cond": "(__START__ || __STARTED__) && m1.out_piso.shift_ctr_r == 0",
+          "val" : "m1.out_piso.data_o",
+          "width": "auto"
+        }
+      },
+
+    "verilog-inline-monitors" : {
+        "token_record": {
+            "verilog": [
+                "always @(posedge __VLG_I_core_clk_i) begin",
+                "   if(rst) begin io_token <= 0; token_clk_i <= 0; end",
+                "   else if (random_token) begin",
+                "       io_token <= 1;",
+                "       token_clk_i <= ~token_clk_i;",
+                "   end",
+                "   else io_token <= 0;",
+                "end"
+            ],
+
+            "defs" : [
+                ["random_token", 1, "wire"],
+                ["io_token", 1, "reg"],
+                ["token_clk_i", 1 ,"reg"]
+            ],
+
+            "refs" : [
+
+            ]
+        },
+
+        "counter_record":{
+            "verilog": [
+                "assign sent_counter = m1.ch_0_sso.pos_credit_ctr.r_counter_r[5:0] + m1.ch_0_sso.neg_credit_ctr.r_counter_r[5:0];",
+                "assign finish_counter = {(m1.ch_0_sso.pos_credit_ctr.w_counter_binary_r_rsync[3:0] + m1.ch_0_sso.neg_credit_ctr.w_counter_binary_r_rsync[3:0]),3'b000};"
+            ],
+            "defs" :[
+                ["sent_counter", 7, "reg"],
+                ["finish_counter", 7, "reg"]
+            ],
+            "refs" :[
+                "m1.ch_0_sso.pos_credit_ctr.r_counter_r",
+                "m1.ch_0_sso.neg_credit_ctr.r_counter_r",
+                "m1.ch_0_sso.pos_credit_ctr.w_counter_binary_r_rsync",
+                "m1.ch_0_sso.neg_credit_ctr.w_counter_binary_r_rsync"
+            ]
+        },
+
+        "input_constraints":{
+            "verilog":[
+                "always @(posedge __VLG_I_core_clk_i) begin",
+                "    if(rst) begin valid_i <= 0; data_i <=0; end",
+                "    else",
+                "       if(valid_i == 0 || (valid_i == 1 && m1.core_ready_o) ) begin ",
+                "          valid_i <= random_valid; data_i <= random_data; end",
+                "end"
+            ],
+            "defs": [
+                ["random_valid", 1, "wire"],
+                ["random_data", 64, "wire"],
+                ["valid_i", 1 ,"reg"],
+                ["data_i", 64 ,"reg"]
+
+            ],
+            "refs": [
+                "m1.core_ready_o"
+            ]
+        }
+
+    },
+
+    "interface mapping": {
+       
+       "core_clk_i"           :           "**KEEP**" ,
+       "core_link_reset_i"    :           "**RESET**",
+       "core_data_i"          :           "core_data_in",
+       "core_valid_i"         :           "core_valid_in",
+       "core_ready_o"         :           "**KEEP**",
+
+       "io_clk_i"             :           "**CLOCK**",
+       "io_link_reset_i"      :           "**RESET**",
+       "async_token_reset_i"  :           "**RESET**",
+       
+       "io_clk_r_o"           :           "**KEEP**",
+       "io_data_r_o"          :           "**SO**",
+       "io_valid_r_o"         :           "**SO**",
+
+       "token_clk_i"          :           "**KEEP**"
+    },
+  
+    "mapping control":[
+        "m0.io_token == #io_token#",
+        "m1.token_clk_i[0] == #token_clk_i# && m1.token_clk_i[1] == #token_clk_i#"
+    ],
+  
+    "assumptions" : [
+        "m1.core_data_i == #data_i#",
+        "m1.core_valid_i == #valid_i#",
+        "sent_counter - finish_counter <= 7'b1000000"
+      ]
+  
+}

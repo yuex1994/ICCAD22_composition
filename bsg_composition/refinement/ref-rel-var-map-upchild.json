@@ -1,0 +1,147 @@
+{
+    "models": { "ILA":"m0" , "VERILOG": "m1" },
+  
+    "state mapping": {
+        "io_valid_out"    : "#valid_check#",
+        "io_data_out_ch0" : "m1.io_data_r_o[7:0]",
+        "io_data_out_ch1" : "m1.io_data_r_o[15:8]",
+
+        "data_cycle_0"    : "#data_check#",
+        "data_cycle_1"    : "#data_check#",
+        "child_valid"     : "#child_valid#",
+        "sent_cnt"        : "#sent_counter#",
+        "finish_cnt"      : "#finish_counter#",
+
+        "step"         : [["__START__", "#cnt#"], 
+                          ["__IEND__", "#cnt_oddr#"]]
+    },
+
+    "value-holder" : {
+        "cnt_oddr" :{
+          "cond": "__CYCLE_CNT__ == 1",
+          "val" : "#cnt#",
+          "width": 2
+        }
+      },
+
+    "verilog-inline-monitors" : {
+        "cnt_data_record":{
+            "verilog": [
+                "assign sent_counter = m1.ch_0_sso.pos_credit_ctr.r_counter_r[5:0] + m1.ch_0_sso.neg_credit_ctr.r_counter_r[5:0] - 7'b1000000;",
+                "assign finish_counter = {(m1.ch_0_sso.pos_credit_ctr.w_counter_binary_r_rsync[3:0] + m1.ch_1_sso.neg_credit_ctr.w_counter_binary_r_rsync[3:0]),3'b000};",
+                "assign ready_counter = sent_counter - finish_counter;",
+
+                "assign data = {m1.ch_1_sso.io_async_fifo_data[15:0], 16'b0} + m1.ch_0_sso.io_async_fifo_data[15:0];",
+                "always @(posedge clk) begin",
+                "   data_delay <= data; valid_delay <= m1.io_valid_r_o[0]; end",
+                "assign data_check = (m1.ch_0_oddr_phy.odd_r == 1'b1 ? data_delay : data);",
+
+                "assign valid_check = (m1.ch_0_oddr_phy.odd_r == 1'b1 ? valid_delay: m1.io_valid_r_o[0]);",
+
+                "always @(posedge clk) begin",
+                "   if(rst) begin cnt <= 0; child_valid_d <= 0; end",
+                "   else begin",
+                "        child_valid_d <= m1.ch_0_sso.io_async_fifo_valid;",
+                "        if ((m1.ch_0_sso.io_async_fifo_valid & m1.ch_0_oddr_phy.ready_o & (ready_counter < 7'b1000000)) || (cnt != 0) )",
+                "             cnt <= cnt + 1; end",
+                "end",
+
+                "assign child_valid = m1.ch_0_sso.io_async_fifo_valid || child_valid_d || m1.io_valid_r_o[0];"
+            ],
+            "defs" :[
+                ["sent_counter",   7, "wire"],
+                ["finish_counter", 7, "wire"],
+                ["ready_counter", 7, "wire"],
+                ["data",       32, "wire"],
+                ["data_delay", 32, "reg"],
+                ["data_check", 32, "wire"],
+                ["cnt", 2, "reg"],
+                ["valid_delay", 1, "reg"],
+                ["valid_check", 1, "wire"],
+                ["child_valid_d", 1, "reg"],
+                ["child_valid",   1, "wire"]
+            ],
+            "refs" :[
+                "m1.ch_0_sso.pos_credit_ctr.r_counter_r",
+                "m1.ch_0_sso.neg_credit_ctr.r_counter_r",
+                "m1.ch_0_sso.pos_credit_ctr.w_counter_binary_r_rsync",
+                "m1.ch_0_sso.neg_credit_ctr.w_counter_binary_r_rsync",
+                "m1.ch_1_sso.io_async_fifo_data",
+                "m1.ch_0_sso.io_async_fifo_data",
+                "m1.ch_0_oddr_phy.odd_r"
+            ]
+        },
+
+        "token_record": {
+            "verilog": [
+                "always @(posedge __VLG_I_core_clk_i) begin",
+                "   if(rst) begin io_token <= 0; token_clk_i <= 0; end",
+                "   else if (random_token) begin",
+                "       io_token <= 1;",
+                "       token_clk_i <= ~token_clk_i;",
+                "   end",
+                "   else io_token <= 0;",
+                "end"
+            ],
+
+            "defs" : [
+                ["random_token", 1, "wire"],
+                ["io_token", 1, "reg"],
+                ["token_clk_i", 1 ,"reg"]
+            ],
+
+            "refs" : [
+
+            ]
+        },
+
+        "commit_stage":{
+            "verilog" :[
+                "always @(posedge clk) begin ",
+                "    if(m1.ch_0_oddr_phy.data_i[8] && m1.ch_0_oddr_phy.ready_o)",
+                "        commit <= 1;",
+                "    else if (commit && m1.ch_0_oddr_phy.ready_o)",
+                "        commit <= 0;",
+                "end" 
+            ],
+            "defs" : [
+                ["commit", 1, "reg"]
+            ],
+            "refs" : [
+                "m1.ch_0_oddr_phy.data_i[8]",
+                "m1.ch_0_oddr_phy.ready_o"
+            ]
+        }
+
+    },
+  
+    "interface mapping": {
+       
+       "core_clk_i"           :           "**KEEP**" ,
+       "core_link_reset_i"    :           "**RESET**",
+       "core_data_i"          :           "**KEEP**",
+       "core_valid_i"         :           "**KEEP**",
+       "core_ready_o"         :           "**KEEP**",
+
+       "io_clk_i"             :           "**CLOCK**",
+       "io_link_reset_i"      :           "**RESET**",
+       "async_token_reset_i"  :           "**RESET**",
+       
+       "io_clk_r_o"           :           "**KEEP**",
+       "io_data_r_o"          :           "**SO**",
+       "io_valid_r_o"         :           "**SO**",
+
+       "token_clk_i"          :           "**KEEP**"
+    },
+  
+    "mapping control":[
+        "m0.io_token == #io_token#",
+        "m1.token_clk_i[0] == #token_clk_i# && m1.token_clk_i[1] == #token_clk_i#"
+    ],
+  
+    "assumptions" : [
+        "sent_counter - finish_counter <= 7'b1000000",
+        "~(valid_check & cnt!= 2'b10) || m1.ch_0_sso.io_async_fifo_valid == 0 "
+      ]
+  
+}

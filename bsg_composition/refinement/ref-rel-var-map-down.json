@@ -1,0 +1,115 @@
+{
+    "models": { "ILA":"m0" , "VERILOG": "m1" },
+  
+    "state mapping": {
+        "core_data_out"  : "{m1.core_data_o[47:32],m1.core_data_o[15:0]} ",
+        "core_valid_out" : "core_valid_o",
+        "io_token_out"   : [["__START__", "#core_token_out#"], 
+                            ["__IEND__", "#token_commit#"]],
+        "io_valid"  : [["__START__", "#io_valid#"], 
+                       ["__IEND__", "#io_valid_commit#"]],
+        "io_data"   : "m1.ch_0_iddr_data.data_p_r[7:0]",
+        "core_data0" : "m1.ch_0_downstream.data_commit",
+
+        "buffer" : "**MEM**buffer",
+        "rptr"   : [["__START__", "m1.ch_0_downstream.baf.r_ptr_binary_r"],
+                    ["__IEND__", "#rptr_commit#"]],
+        "wptr"   : [["__START__", "#wptr_decode#"], 
+                    ["__IEND__", "m1.ch_0_downstream.baf.w_ptr_binary_r"]],
+        "wptr_t" : [["__START__", "m1.ch_0_downstream.baf.w_ptr_binary_r_rsync"], ["__IEND__", null]],
+        "full"   : "m1.ch_0_downstream.baf.w_full_o"
+    },
+
+    "value-holder":{
+        "wptr_decode" :{
+            "cond": "__CYCLE_CNT__ == 3",
+            "val" : "m1.ch_0_downstream.baf.w_ptr_binary_r",
+            "width": "auto"
+        },
+        "rptr_commit" :{
+            "cond": "__CYCLE_CNT__ == 2",
+            "val" : "m1.ch_0_downstream.baf.r_ptr_binary_r",
+            "width": "auto"
+        },
+        "token_commit" :{
+            "cond": "__CYCLE_CNT__ == 2",
+            "val" : "#core_token_out#",
+            "width": "auto"
+        },
+        "io_valid_commit":{
+            "cond": "__CYCLE_CNT__ == 1",
+            "val" : "#io_valid#",
+            "width": 1
+        }
+    },
+
+    "verilog-inline-monitors" : {
+        "input_record": {
+            "verilog": [
+                "always @(posedge clk) begin",
+                "   if(rst) io_valid <= 0;",
+                "   else if (~io_valid && m1.io_valid_i) io_valid <= 1'b1;",
+                "   else io_valid <= 1'b0;",
+                "end",
+                "always @(posedge m1.core_clk_i) begin",
+                "   if(rst) core_token_r_o_d <= 0;",
+                "   else core_token_r_o_d <= core_token_r_o[0];",
+                "end",
+                "assign core_token_out = core_token_r_o_d ^ core_token_r_o;"
+            ],
+            "defs" : [
+                ["io_valid", 1, "reg"],
+                ["core_token_r_o_d", 1, "reg"],
+                ["core_token_out", 1, "reg"]
+            ],
+            "refs" : [
+                "m1.io_valid_i",
+                "m1.core_token_r_o"
+            ]
+        }
+    },
+
+    "interface mapping": {
+       
+       "core_clk_i"          :         "**KEEP**",
+       "core_link_reset_i"   :         "**RESET**",
+       "core_data_o"         :         "**SO**",
+       "core_valid_o"        :         "**SO**",
+       "core_yumi_i"         :         "**KEEP**",
+
+       "io_clk_i"            :         "**KEEP**",
+       "io_link_reset_i"     :         "**RESET**",
+       "io_data_i"           :         "io_data_in",
+       "io_valid_i"          :         "**KEEP**",
+
+       "core_token_r_o"      :         "**SO**"
+    },
+  
+    "mapping control":[
+        "m0.io_valid_in == m1.io_valid_i || #io_valid# ",
+        "~m1.core_yumi_i || m0.core_ready",
+        "m1.ch_0_downstream.baf.r_ptr_binary_r ==  __MEM_buffer_0_raddr",
+        "m1.ch_0_downstream.baf.w_ptr_binary_r ==  __MEM_buffer_0_waddr",
+        "m1.ch_0_downstream.baf.w_data_i == __MEM_buffer_0_wdata",
+        "m1.ch_0_downstream.baf.r_data_o == mi0.ila_rdata",
+        "m1.core_clk_i == m1.io_clk_i"
+    ],
+
+    "annotation": {
+        "memory-ports" : {
+          "buffer.wen":"m1.ch_0_downstream.baf.w_enq_i && (__CYCLE_CNT__ == 3) "
+        }
+    },
+  
+    "assumptions" : [
+        "~#io_valid# || m1.io_clk_i",
+        "m1.ch_0_downstream.twofer.full_r == 0",
+        "~m1.core_yumi_i || m1.core_valid_o",
+        "~(m0.core_ready & m1.core_valid_o) || m1.core_yumi_i"
+    ],
+
+    "composition checks" : [
+        
+    ]
+  
+}

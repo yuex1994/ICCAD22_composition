@@ -1,0 +1,19 @@
+{
+    "instructions": [
+      {
+        "instruction" : "DATA_IN",
+        "ready signal" : "m1.out_piso.shift_ctr_r",
+        "max bound": 50
+        //"type": "no output"
+      },
+
+      {
+        "instruction" : "TOKEN_IN",
+        "ready bound" : 2
+        //"type": "no output"
+      }
+    ],
+    
+    "global invariants": []
+  
+  }

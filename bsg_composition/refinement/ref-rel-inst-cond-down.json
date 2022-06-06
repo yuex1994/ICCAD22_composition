@@ -1,0 +1,48 @@
+{
+  "instructions": [
+    {
+      "instruction" : "DOWN_DATA_IN_FIRST",
+      "ready bound" : 1,
+      //"type": "no output",
+      "start condition" : ["$decode$", "m1.io_clk_i == 0"]
+    },
+
+    {
+      "instruction" : "DOWN_DATA_IN_SECOND",
+      "ready bound" : 4,
+      //"type": "no output"
+      "start condition" : ["$decode$", "m1.io_clk_i == 1"]
+    },
+
+    {
+      "instruction" : "DOWN_DATA0",
+      "ready bound" : 2,
+      "start condition" : ["$decode$", "m1.core_clk_i == 0"]
+      //"type": "no output"
+    },
+
+    {
+      "instruction" : "DOWN_DATA1",
+      "ready bound" : 4
+      //"type": "output",
+      //"payload" : ["core_data_out", ""],
+      //"valid": ["core_valid_out", "io_token_out"]
+    },
+
+    {
+      "instruction" : "DOWN_DATA_SEND",
+      "ready bound" : 2,
+      "start condition" : ["$decode$", "m1.core_clk_i == 0"]
+      //"type": "send"
+    },
+
+    {
+      "instruction" : "DOWN_TOKEN_SEND",
+      "ready bound" : 2
+      //"type": "send"
+    }
+  ],
+  
+  "global invariants": []
+
+}
