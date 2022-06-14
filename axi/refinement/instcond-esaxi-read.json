@@ -1,0 +1,39 @@
+{
+  "instructions": [
+    {
+      "instruction" : "R_Slave_Reset",
+      "ready bound": 1
+    },
+    
+    {
+      "instruction" : "AR_Slave_Wait",
+      "ready bound": 1
+    },  
+
+    {
+      "instruction" : "AR_Slave_Commit",
+      "ready bound": 1
+    },
+
+    {
+      "instruction" : "R_Slave_Prepare",
+      "ready bound": 1
+    },
+
+    {
+      "instruction" : "R_Slave_Asserted",
+      "ready bound": 1
+    },
+
+    {
+      "instruction" : "R_Slave_Busy",
+      "ready bound": 1
+    } 
+  ],
+  
+  "global invariants": [
+    "(~m1.read_active || ~m1.s_axi_arready) == 1"
+  ]
+
+}
+

@@ -1,0 +1,37 @@
+{
+  "instructions": [
+    {
+      "instruction" : "R_Master_Reset",
+      "ready bound": 1
+    },
+    
+    {
+      "instruction" : "AR_Master_Prepare",
+      "ready bound": 1
+    },    
+
+    {
+      "instruction" : "AR_Master_Asserted",
+      "ready bound": 1
+    },  
+
+    {
+      "instruction" : "AR_Master_Commit",
+      "ready bound": 1
+    },
+
+    {
+      "instruction" : "R_Master_Wait",
+      "ready bound": 1
+    },
+
+    {
+      "instruction" : "R_Master_Busy",
+      "ready bound": 1
+    }  
+  ],
+  
+  "global invariants": []
+
+}
+

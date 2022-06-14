@@ -1,0 +1,39 @@
+{
+  "instructions": [
+    {
+      "instruction" : "W_Slave_Reset",
+      "ready bound": 1
+    },
+    
+    {
+      "instruction" : "AW_Slave_Commit",
+      "ready bound": 1
+    },
+
+    {
+      "instruction" : "W_Slave_Wait",
+      "ready bound": 1
+    },
+
+    {
+      "instruction" : "W_Slave_Busy",
+      "ready bound": 1
+    },
+
+    {
+      "instruction" : "B_Slave_Commit",
+      "ready bound": 1
+    },   
+
+    {
+      "instruction" : "AW_Slave_Wait",
+      "ready bound": 1
+    } 
+  ],
+  
+  "global invariants": ["(m1.write_active || ~m1.s_axi_wready) == 1", 
+                        "(~m1.write_active || ~m1.s_axi_awready) == 1",
+                        "(~m1.write_active || ~m1.s_axi_bvalid) == 1"]
+
+}
+

@@ -1,0 +1,114 @@
+{
+  "models": { "ILA":"m0" , "VERILOG": "m1" },
+  "state mapping": { 
+    "m_axi_awid"    : "m_axi_awid"   ,
+    "m_axi_awaddr"  : "m_axi_awaddr" ,
+    "m_axi_awlen"   : "m_axi_awlen"  ,
+    "m_axi_awsize"  : "m_axi_awsize" ,
+    "m_axi_awburst" : "m_axi_awburst",
+    "m_axi_awlock"  : "m_axi_awlock" ,
+    "m_axi_awcache" : "m_axi_awcache",
+    "m_axi_awprot"  : "m_axi_awprot" ,
+    "m_axi_awqos"   : "m_axi_awqos"  ,
+    "m_axi_awvalid" : "m_axi_awvalid",
+
+    "m_axi_wid"     : "m_axi_wid"   ,
+    "m_axi_wdata"   : "m_axi_wdata" ,
+    "m_axi_wstrb"   : "m_axi_wstrb" ,
+    "m_axi_wlast"   : "m_axi_wlast" ,
+    "m_axi_wvalid"  : "m_axi_wvalid",
+
+    "m_axi_bready"  : "m_axi_bready",
+
+    "tx_wactive" : null,
+    "tx_bwait": null,
+    "tx_awlen": null
+  },
+
+  "interface mapping": {
+
+   "wr_wait":   "**KEEP**",
+   "rd_wait":   "**KEEP**",
+   "rr_access": "**KEEP**",
+   "rr_packet": "**KEEP**",
+   "wr_access": "**KEEP**",
+   "wr_packet": "**KEEP**",
+   "rd_access": "**KEEP**",
+   "rd_packet": "**KEEP**",
+   "rr_wait":   "**KEEP**",
+
+   "m_axi_awid":    "**SO**",
+   "m_axi_awaddr":    "**SO**",
+   "m_axi_awlen":     "**SO**",
+   "m_axi_awsize":    "**SO**",
+   "m_axi_awburst":    "**SO**",
+   "m_axi_awlock":    "**SO**",
+   "m_axi_awcache":    "**SO**",
+   "m_axi_awprot":    "**SO**",
+   "m_axi_awqos":    "**SO**",
+   "m_axi_awvalid":    "**SO**",
+   "m_axi_wid":    "**SO**",
+   "m_axi_wdata":    "**SO**",
+   "m_axi_wstrb":    "**SO**",
+   "m_axi_wlast":    "**SO**",
+   "m_axi_wvalid":    "**SO**",
+   "m_axi_bready":    "**SO**",
+   "m_axi_arid":    "**SO**",
+   "m_axi_araddr":    "**SO**",
+   "m_axi_arlen":    "**SO**",
+   "m_axi_arsize":    "**SO**",
+   "m_axi_arburst":    "**SO**",
+   "m_axi_arlock":    "**SO**",
+   "m_axi_arcache":    "**SO**",
+   "m_axi_arprot":    "**SO**",
+   "m_axi_arqos":    "**SO**",
+   "m_axi_arvalid":    "**SO**",
+   "m_axi_rready":    "**SO**",
+   // Inputs
+   "m_axi_awready" :     "m_axi_awready",
+   "m_axi_wready" :     "m_axi_wready",
+   "m_axi_bid" :     "m_axi_bid",
+   "m_axi_bresp" :     "m_axi_bresp",
+   "m_axi_bvalid" :     "m_axi_bvalid",
+   "m_axi_arready" :     "**KEEP**", 
+   "m_axi_rid" :         "**KEEP**", 
+   "m_axi_rdata" :       "**KEEP**", 
+   "m_axi_rresp" :       "**KEEP**", 
+   "m_axi_rlast" :       "**KEEP**", 
+   "m_axi_rvalid" :      "**KEEP**", 
+
+    "m_axi_aresetn" :           "m_axi_aresetn", 
+    "m_axi_aclk"    :           "**CLOCK**"
+  },
+
+  "mapping control" : [
+    "write_addr_valid == (m1.wr_access || m1.awvalid_b)",
+    "write_valid == (m1.wr_access || m1.wvalid_b)",
+    "awlen == (m1.awvalid_b ? m1.awlen_b : 8'b0)",
+    "awaddr == (m1.awvalid_b ? m1.awaddr_b : m1.wr_dstaddr[31:0])",
+    "awsize == (m1.awvalid_b ? m1.awsize_b : { 1'b0, m1.wr_datamode[1:0] })",
+    "awburst == 2'b01",
+    "wdata == (m1.wvalid_b ? m1.wdata_b[63:0] : m1.wdata_aligned[63:0])",
+    "wstrb == (m1.wvalid_b ? m1.wstrb_b[7:0] : m1.wstrb_aligned[7:0])",
+    "bready == 1'b1"
+
+  ],
+
+  "functions":{
+    "unknown0" : [[ "__IEND__", "m1.m_axi_awaddr" ]],
+    "unknown1" : [[ "__IEND__", "m1.m_axi_awlen"]],
+    "unknown2" : [[ "__IEND__", "m1.m_axi_awsize" ]],
+    "unknown3" : [[ "__IEND__", "m1.m_axi_awburst"]],
+
+    "unknown4" : [[ "__IEND__", "m1.m_axi_awaddr" ]],
+    "unknown5" : [[ "__IEND__", "m1.m_axi_awlen"]],
+    "unknown6" : [[ "__IEND__", "m1.m_axi_awsize" ]],
+    "unknown7" : [[ "__IEND__", "m1.m_axi_awburst"]],
+
+    "unknown8" :  [[ "__IEND__", "m1.m_axi_wdata"]],
+    "unknown9" :  [[ "__IEND__", "m1.m_axi_wstrb"]],
+    "unknown10" : [[ "__IEND__", "m1.m_axi_wdata"]],
+    "unknown11" : [[ "__IEND__", "m1.m_axi_wstrb"]]
+  }
+
+}
