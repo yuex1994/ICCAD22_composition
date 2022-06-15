@@ -1,0 +1,1236 @@
+
+module NV_NVDLA_csc_top (
+  csb2csc_req_pd //|< i
+  ,csb2csc_req_pvld //|< i
+
+  ,nvdla_core_clk //|< i
+  ,nvdla_core_rstn //|< i
+
+  ,csb2csc_req_prdy //|> o
+
+  ,sc2mac_dat_a_pvld //|> o
+  ,sc2mac_dat_b_pvld //|> o
+  ,sc2mac_wt_a_pvld //|> o
+  ,sc2mac_wt_b_pvld //|> o
+);
+
+    input [62:0] csb2csc_req_pd; //|< i
+    input csb2csc_req_pvld; //|< i
+
+    input nvdla_core_clk; //|< i
+    input nvdla_core_rstn; //|< i
+
+    output csb2csc_req_prdy; //|> o
+
+    output sc2mac_dat_a_pvld; //|> o
+    output sc2mac_dat_b_pvld; //|> o
+    output sc2mac_wt_a_pvld; //|> o
+    output sc2mac_wt_b_pvld; //|> o
+
+endmodule
+
+
+module NV_NVDLA_csc (
+   accu2sc_credit_size //|< i
+  ,accu2sc_credit_vld //|< i
+
+  ,cdma2sc_dat_entries //|< i
+  ,cdma2sc_dat_pending_ack //|< i
+  ,cdma2sc_dat_slices //|< i
+  ,cdma2sc_dat_updt //|< i
+
+  ,cdma2sc_wmb_entries //|< i
+
+  ,cdma2sc_wt_entries //|< i
+  ,cdma2sc_wt_kernels //|< i
+  ,cdma2sc_wt_pending_ack //|< i
+  ,cdma2sc_wt_updt //|< i
+
+  ,csb2csc_req_pd //|< i
+  ,csb2csc_req_pvld //|< i
+
+  ,dla_clk_ovr_on_sync //|< i for testing
+  ,global_clk_ovr_on_sync //|< i for testing
+
+  ,nvdla_core_clk //|< i
+  ,nvdla_core_rstn //|< i
+
+  ,pwrbus_ram_pd //|< i 31:0 for sequence generator
+
+  ,sc2buf_dat_rd_data //|< i
+  ,sc2buf_dat_rd_valid //|< i
+  ,sc2buf_wmb_rd_data //|< i
+  ,sc2buf_wmb_rd_valid //|< i
+  ,sc2buf_wt_rd_data //|< i
+  ,sc2buf_wt_rd_valid //|< i
+  
+  ,tmc2slcg_disable_clock_gating //|< i
+  ,csb2csc_req_prdy //|> o
+  ,csc2csb_resp_pd //|> o
+  ,csc2csb_resp_valid //|> o
+  ,sc2buf_dat_rd_addr //|> o
+  ,sc2buf_dat_rd_en //|> o
+  ,sc2buf_wmb_rd_addr //|> o
+  ,sc2buf_wmb_rd_en //|> o
+  ,sc2buf_wt_rd_addr //|> o
+  ,sc2buf_wt_rd_en //|> o
+  ,sc2cdma_dat_entries //|> o
+  ,sc2cdma_dat_pending_req //|> o
+  ,sc2cdma_dat_slices //|> o
+  ,sc2cdma_dat_updt //|> o
+  ,sc2cdma_wmb_entries //|> o
+  ,sc2cdma_wt_entries //|> o
+  ,sc2cdma_wt_kernels //|> o
+  ,sc2cdma_wt_pending_req //|> o
+  ,sc2cdma_wt_updt //|> o
+
+  
+  ,sc2mac_dat_a_data0 //|> o
+  ,sc2mac_dat_a_data1 //|> o
+  ,sc2mac_dat_a_data10 //|> o
+  ,sc2mac_dat_a_data100 //|> o
+  ,sc2mac_dat_a_data101 //|> o
+  ,sc2mac_dat_a_data102 //|> o
+  ,sc2mac_dat_a_data103 //|> o
+  ,sc2mac_dat_a_data104 //|> o
+  ,sc2mac_dat_a_data105 //|> o
+  ,sc2mac_dat_a_data106 //|> o
+  ,sc2mac_dat_a_data107 //|> o
+  ,sc2mac_dat_a_data108 //|> o
+  ,sc2mac_dat_a_data109 //|> o
+  ,sc2mac_dat_a_data11 //|> o
+  ,sc2mac_dat_a_data110 //|> o
+  ,sc2mac_dat_a_data111 //|> o
+  ,sc2mac_dat_a_data112 //|> o
+  ,sc2mac_dat_a_data113 //|> o
+  ,sc2mac_dat_a_data114 //|> o
+  ,sc2mac_dat_a_data115 //|> o
+  ,sc2mac_dat_a_data116 //|> o
+  ,sc2mac_dat_a_data117 //|> o
+  ,sc2mac_dat_a_data118 //|> o
+  ,sc2mac_dat_a_data119 //|> o
+  ,sc2mac_dat_a_data12 //|> o
+  ,sc2mac_dat_a_data120 //|> o
+  ,sc2mac_dat_a_data121 //|> o
+  ,sc2mac_dat_a_data122 //|> o
+  ,sc2mac_dat_a_data123 //|> o
+  ,sc2mac_dat_a_data124 //|> o
+  ,sc2mac_dat_a_data125 //|> o
+  ,sc2mac_dat_a_data126 //|> o
+  ,sc2mac_dat_a_data127 //|> o
+  ,sc2mac_dat_a_data13 //|> o
+  ,sc2mac_dat_a_data14 //|> o
+  ,sc2mac_dat_a_data15 //|> o
+  ,sc2mac_dat_a_data16 //|> o
+  ,sc2mac_dat_a_data17 //|> o
+  ,sc2mac_dat_a_data18 //|> o
+  ,sc2mac_dat_a_data19 //|> o
+  ,sc2mac_dat_a_data2 //|> o
+  ,sc2mac_dat_a_data20 //|> o
+  ,sc2mac_dat_a_data21 //|> o
+  ,sc2mac_dat_a_data22 //|> o
+  ,sc2mac_dat_a_data23 //|> o
+  ,sc2mac_dat_a_data24 //|> o
+  ,sc2mac_dat_a_data25 //|> o
+  ,sc2mac_dat_a_data26 //|> o
+  ,sc2mac_dat_a_data27 //|> o
+  ,sc2mac_dat_a_data28 //|> o
+  ,sc2mac_dat_a_data29 //|> o
+  ,sc2mac_dat_a_data3 //|> o
+  ,sc2mac_dat_a_data30 //|> o
+  ,sc2mac_dat_a_data31 //|> o
+  ,sc2mac_dat_a_data32 //|> o
+  ,sc2mac_dat_a_data33 //|> o
+  ,sc2mac_dat_a_data34 //|> o
+  ,sc2mac_dat_a_data35 //|> o
+  ,sc2mac_dat_a_data36 //|> o
+  ,sc2mac_dat_a_data37 //|> o
+  ,sc2mac_dat_a_data38 //|> o
+  ,sc2mac_dat_a_data39 //|> o
+  ,sc2mac_dat_a_data4 //|> o
+  ,sc2mac_dat_a_data40 //|> o
+  ,sc2mac_dat_a_data41 //|> o
+  ,sc2mac_dat_a_data42 //|> o
+  ,sc2mac_dat_a_data43 //|> o
+  ,sc2mac_dat_a_data44 //|> o
+  ,sc2mac_dat_a_data45 //|> o
+  ,sc2mac_dat_a_data46 //|> o
+  ,sc2mac_dat_a_data47 //|> o
+  ,sc2mac_dat_a_data48 //|> o
+  ,sc2mac_dat_a_data49 //|> o
+  ,sc2mac_dat_a_data5 //|> o
+  ,sc2mac_dat_a_data50 //|> o
+  ,sc2mac_dat_a_data51 //|> o
+  ,sc2mac_dat_a_data52 //|> o
+  ,sc2mac_dat_a_data53 //|> o
+  ,sc2mac_dat_a_data54 //|> o
+  ,sc2mac_dat_a_data55 //|> o
+  ,sc2mac_dat_a_data56 //|> o
+  ,sc2mac_dat_a_data57 //|> o
+  ,sc2mac_dat_a_data58 //|> o
+  ,sc2mac_dat_a_data59 //|> o
+  ,sc2mac_dat_a_data6 //|> o
+  ,sc2mac_dat_a_data60 //|> o
+  ,sc2mac_dat_a_data61 //|> o
+  ,sc2mac_dat_a_data62 //|> o
+  ,sc2mac_dat_a_data63 //|> o
+  ,sc2mac_dat_a_data64 //|> o
+  ,sc2mac_dat_a_data65 //|> o
+  ,sc2mac_dat_a_data66 //|> o
+  ,sc2mac_dat_a_data67 //|> o
+  ,sc2mac_dat_a_data68 //|> o
+  ,sc2mac_dat_a_data69 //|> o
+  ,sc2mac_dat_a_data7 //|> o
+  ,sc2mac_dat_a_data70 //|> o
+  ,sc2mac_dat_a_data71 //|> o
+  ,sc2mac_dat_a_data72 //|> o
+  ,sc2mac_dat_a_data73 //|> o
+  ,sc2mac_dat_a_data74 //|> o
+  ,sc2mac_dat_a_data75 //|> o
+  ,sc2mac_dat_a_data76 //|> o
+  ,sc2mac_dat_a_data77 //|> o
+  ,sc2mac_dat_a_data78 //|> o
+  ,sc2mac_dat_a_data79 //|> o
+  ,sc2mac_dat_a_data8 //|> o
+  ,sc2mac_dat_a_data80 //|> o
+  ,sc2mac_dat_a_data81 //|> o
+  ,sc2mac_dat_a_data82 //|> o
+  ,sc2mac_dat_a_data83 //|> o
+  ,sc2mac_dat_a_data84 //|> o
+  ,sc2mac_dat_a_data85 //|> o
+  ,sc2mac_dat_a_data86 //|> o
+  ,sc2mac_dat_a_data87 //|> o
+  ,sc2mac_dat_a_data88 //|> o
+  ,sc2mac_dat_a_data89 //|> o
+  ,sc2mac_dat_a_data9 //|> o
+  ,sc2mac_dat_a_data90 //|> o
+  ,sc2mac_dat_a_data91 //|> o
+  ,sc2mac_dat_a_data92 //|> o
+  ,sc2mac_dat_a_data93 //|> o
+  ,sc2mac_dat_a_data94 //|> o
+  ,sc2mac_dat_a_data95 //|> o
+  ,sc2mac_dat_a_data96 //|> o
+  ,sc2mac_dat_a_data97 //|> o
+  ,sc2mac_dat_a_data98 //|> o
+  ,sc2mac_dat_a_data99 //|> o
+  ,sc2mac_dat_a_mask //|> o
+  ,sc2mac_dat_a_pd //|> o
+  ,sc2mac_dat_a_pvld //|> o
+  ,sc2mac_dat_b_data0 //|> o
+  ,sc2mac_dat_b_data1 //|> o
+  ,sc2mac_dat_b_data10 //|> o
+  ,sc2mac_dat_b_data100 //|> o
+  ,sc2mac_dat_b_data101 //|> o
+  ,sc2mac_dat_b_data102 //|> o
+  ,sc2mac_dat_b_data103 //|> o
+  ,sc2mac_dat_b_data104 //|> o
+  ,sc2mac_dat_b_data105 //|> o
+  ,sc2mac_dat_b_data106 //|> o
+  ,sc2mac_dat_b_data107 //|> o
+  ,sc2mac_dat_b_data108 //|> o
+  ,sc2mac_dat_b_data109 //|> o
+  ,sc2mac_dat_b_data11 //|> o
+  ,sc2mac_dat_b_data110 //|> o
+  ,sc2mac_dat_b_data111 //|> o
+  ,sc2mac_dat_b_data112 //|> o
+  ,sc2mac_dat_b_data113 //|> o
+  ,sc2mac_dat_b_data114 //|> o
+  ,sc2mac_dat_b_data115 //|> o
+  ,sc2mac_dat_b_data116 //|> o
+  ,sc2mac_dat_b_data117 //|> o
+  ,sc2mac_dat_b_data118 //|> o
+  ,sc2mac_dat_b_data119 //|> o
+  ,sc2mac_dat_b_data12 //|> o
+  ,sc2mac_dat_b_data120 //|> o
+  ,sc2mac_dat_b_data121 //|> o
+  ,sc2mac_dat_b_data122 //|> o
+  ,sc2mac_dat_b_data123 //|> o
+  ,sc2mac_dat_b_data124 //|> o
+  ,sc2mac_dat_b_data125 //|> o
+  ,sc2mac_dat_b_data126 //|> o
+  ,sc2mac_dat_b_data127 //|> o
+  ,sc2mac_dat_b_data13 //|> o
+  ,sc2mac_dat_b_data14 //|> o
+  ,sc2mac_dat_b_data15 //|> o
+  ,sc2mac_dat_b_data16 //|> o
+  ,sc2mac_dat_b_data17 //|> o
+  ,sc2mac_dat_b_data18 //|> o
+  ,sc2mac_dat_b_data19 //|> o
+  ,sc2mac_dat_b_data2 //|> o
+  ,sc2mac_dat_b_data20 //|> o
+  ,sc2mac_dat_b_data21 //|> o
+  ,sc2mac_dat_b_data22 //|> o
+  ,sc2mac_dat_b_data23 //|> o
+  ,sc2mac_dat_b_data24 //|> o
+  ,sc2mac_dat_b_data25 //|> o
+  ,sc2mac_dat_b_data26 //|> o
+  ,sc2mac_dat_b_data27 //|> o
+  ,sc2mac_dat_b_data28 //|> o
+  ,sc2mac_dat_b_data29 //|> o
+  ,sc2mac_dat_b_data3 //|> o
+  ,sc2mac_dat_b_data30 //|> o
+  ,sc2mac_dat_b_data31 //|> o
+  ,sc2mac_dat_b_data32 //|> o
+  ,sc2mac_dat_b_data33 //|> o
+  ,sc2mac_dat_b_data34 //|> o
+  ,sc2mac_dat_b_data35 //|> o
+  ,sc2mac_dat_b_data36 //|> o
+  ,sc2mac_dat_b_data37 //|> o
+  ,sc2mac_dat_b_data38 //|> o
+  ,sc2mac_dat_b_data39 //|> o
+  ,sc2mac_dat_b_data4 //|> o
+  ,sc2mac_dat_b_data40 //|> o
+  ,sc2mac_dat_b_data41 //|> o
+  ,sc2mac_dat_b_data42 //|> o
+  ,sc2mac_dat_b_data43 //|> o
+  ,sc2mac_dat_b_data44 //|> o
+  ,sc2mac_dat_b_data45 //|> o
+  ,sc2mac_dat_b_data46 //|> o
+  ,sc2mac_dat_b_data47 //|> o
+  ,sc2mac_dat_b_data48 //|> o
+  ,sc2mac_dat_b_data49 //|> o
+  ,sc2mac_dat_b_data5 //|> o
+  ,sc2mac_dat_b_data50 //|> o
+  ,sc2mac_dat_b_data51 //|> o
+  ,sc2mac_dat_b_data52 //|> o
+  ,sc2mac_dat_b_data53 //|> o
+  ,sc2mac_dat_b_data54 //|> o
+  ,sc2mac_dat_b_data55 //|> o
+  ,sc2mac_dat_b_data56 //|> o
+  ,sc2mac_dat_b_data57 //|> o
+  ,sc2mac_dat_b_data58 //|> o
+  ,sc2mac_dat_b_data59 //|> o
+  ,sc2mac_dat_b_data6 //|> o
+  ,sc2mac_dat_b_data60 //|> o
+  ,sc2mac_dat_b_data61 //|> o
+  ,sc2mac_dat_b_data62 //|> o
+  ,sc2mac_dat_b_data63 //|> o
+  ,sc2mac_dat_b_data64 //|> o
+  ,sc2mac_dat_b_data65 //|> o
+  ,sc2mac_dat_b_data66 //|> o
+  ,sc2mac_dat_b_data67 //|> o
+  ,sc2mac_dat_b_data68 //|> o
+  ,sc2mac_dat_b_data69 //|> o
+  ,sc2mac_dat_b_data7 //|> o
+  ,sc2mac_dat_b_data70 //|> o
+  ,sc2mac_dat_b_data71 //|> o
+  ,sc2mac_dat_b_data72 //|> o
+  ,sc2mac_dat_b_data73 //|> o
+  ,sc2mac_dat_b_data74 //|> o
+  ,sc2mac_dat_b_data75 //|> o
+  ,sc2mac_dat_b_data76 //|> o
+  ,sc2mac_dat_b_data77 //|> o
+  ,sc2mac_dat_b_data78 //|> o
+  ,sc2mac_dat_b_data79 //|> o
+  ,sc2mac_dat_b_data8 //|> o
+  ,sc2mac_dat_b_data80 //|> o
+  ,sc2mac_dat_b_data81 //|> o
+  ,sc2mac_dat_b_data82 //|> o
+  ,sc2mac_dat_b_data83 //|> o
+  ,sc2mac_dat_b_data84 //|> o
+  ,sc2mac_dat_b_data85 //|> o
+  ,sc2mac_dat_b_data86 //|> o
+  ,sc2mac_dat_b_data87 //|> o
+  ,sc2mac_dat_b_data88 //|> o
+  ,sc2mac_dat_b_data89 //|> o
+  ,sc2mac_dat_b_data9 //|> o
+  ,sc2mac_dat_b_data90 //|> o
+  ,sc2mac_dat_b_data91 //|> o
+  ,sc2mac_dat_b_data92 //|> o
+  ,sc2mac_dat_b_data93 //|> o
+  ,sc2mac_dat_b_data94 //|> o
+  ,sc2mac_dat_b_data95 //|> o
+  ,sc2mac_dat_b_data96 //|> o
+  ,sc2mac_dat_b_data97 //|> o
+  ,sc2mac_dat_b_data98 //|> o
+  ,sc2mac_dat_b_data99 //|> o
+  ,sc2mac_dat_b_mask //|> o
+  ,sc2mac_dat_b_pd //|> o
+  ,sc2mac_dat_b_pvld //|> o
+  ,sc2mac_wt_a_data0 //|> o
+  ,sc2mac_wt_a_data1 //|> o
+  ,sc2mac_wt_a_data10 //|> o
+  ,sc2mac_wt_a_data100 //|> o
+  ,sc2mac_wt_a_data101 //|> o
+  ,sc2mac_wt_a_data102 //|> o
+  ,sc2mac_wt_a_data103 //|> o
+  ,sc2mac_wt_a_data104 //|> o
+  ,sc2mac_wt_a_data105 //|> o
+  ,sc2mac_wt_a_data106 //|> o
+  ,sc2mac_wt_a_data107 //|> o
+  ,sc2mac_wt_a_data108 //|> o
+  ,sc2mac_wt_a_data109 //|> o
+  ,sc2mac_wt_a_data11 //|> o
+  ,sc2mac_wt_a_data110 //|> o
+  ,sc2mac_wt_a_data111 //|> o
+  ,sc2mac_wt_a_data112 //|> o
+  ,sc2mac_wt_a_data113 //|> o
+  ,sc2mac_wt_a_data114 //|> o
+  ,sc2mac_wt_a_data115 //|> o
+  ,sc2mac_wt_a_data116 //|> o
+  ,sc2mac_wt_a_data117 //|> o
+  ,sc2mac_wt_a_data118 //|> o
+  ,sc2mac_wt_a_data119 //|> o
+  ,sc2mac_wt_a_data12 //|> o
+  ,sc2mac_wt_a_data120 //|> o
+  ,sc2mac_wt_a_data121 //|> o
+  ,sc2mac_wt_a_data122 //|> o
+  ,sc2mac_wt_a_data123 //|> o
+  ,sc2mac_wt_a_data124 //|> o
+  ,sc2mac_wt_a_data125 //|> o
+  ,sc2mac_wt_a_data126 //|> o
+  ,sc2mac_wt_a_data127 //|> o
+  ,sc2mac_wt_a_data13 //|> o
+  ,sc2mac_wt_a_data14 //|> o
+  ,sc2mac_wt_a_data15 //|> o
+  ,sc2mac_wt_a_data16 //|> o
+  ,sc2mac_wt_a_data17 //|> o
+  ,sc2mac_wt_a_data18 //|> o
+  ,sc2mac_wt_a_data19 //|> o
+  ,sc2mac_wt_a_data2 //|> o
+  ,sc2mac_wt_a_data20 //|> o
+  ,sc2mac_wt_a_data21 //|> o
+  ,sc2mac_wt_a_data22 //|> o
+  ,sc2mac_wt_a_data23 //|> o
+  ,sc2mac_wt_a_data24 //|> o
+  ,sc2mac_wt_a_data25 //|> o
+  ,sc2mac_wt_a_data26 //|> o
+  ,sc2mac_wt_a_data27 //|> o
+  ,sc2mac_wt_a_data28 //|> o
+  ,sc2mac_wt_a_data29 //|> o
+  ,sc2mac_wt_a_data3 //|> o
+  ,sc2mac_wt_a_data30 //|> o
+  ,sc2mac_wt_a_data31 //|> o
+  ,sc2mac_wt_a_data32 //|> o
+  ,sc2mac_wt_a_data33 //|> o
+  ,sc2mac_wt_a_data34 //|> o
+  ,sc2mac_wt_a_data35 //|> o
+  ,sc2mac_wt_a_data36 //|> o
+  ,sc2mac_wt_a_data37 //|> o
+  ,sc2mac_wt_a_data38 //|> o
+  ,sc2mac_wt_a_data39 //|> o
+  ,sc2mac_wt_a_data4 //|> o
+  ,sc2mac_wt_a_data40 //|> o
+  ,sc2mac_wt_a_data41 //|> o
+  ,sc2mac_wt_a_data42 //|> o
+  ,sc2mac_wt_a_data43 //|> o
+  ,sc2mac_wt_a_data44 //|> o
+  ,sc2mac_wt_a_data45 //|> o
+  ,sc2mac_wt_a_data46 //|> o
+  ,sc2mac_wt_a_data47 //|> o
+  ,sc2mac_wt_a_data48 //|> o
+  ,sc2mac_wt_a_data49 //|> o
+  ,sc2mac_wt_a_data5 //|> o
+  ,sc2mac_wt_a_data50 //|> o
+  ,sc2mac_wt_a_data51 //|> o
+  ,sc2mac_wt_a_data52 //|> o
+  ,sc2mac_wt_a_data53 //|> o
+  ,sc2mac_wt_a_data54 //|> o
+  ,sc2mac_wt_a_data55 //|> o
+  ,sc2mac_wt_a_data56 //|> o
+  ,sc2mac_wt_a_data57 //|> o
+  ,sc2mac_wt_a_data58 //|> o
+  ,sc2mac_wt_a_data59 //|> o
+  ,sc2mac_wt_a_data6 //|> o
+  ,sc2mac_wt_a_data60 //|> o
+  ,sc2mac_wt_a_data61 //|> o
+  ,sc2mac_wt_a_data62 //|> o
+  ,sc2mac_wt_a_data63 //|> o
+  ,sc2mac_wt_a_data64 //|> o
+  ,sc2mac_wt_a_data65 //|> o
+  ,sc2mac_wt_a_data66 //|> o
+  ,sc2mac_wt_a_data67 //|> o
+  ,sc2mac_wt_a_data68 //|> o
+  ,sc2mac_wt_a_data69 //|> o
+  ,sc2mac_wt_a_data7 //|> o
+  ,sc2mac_wt_a_data70 //|> o
+  ,sc2mac_wt_a_data71 //|> o
+  ,sc2mac_wt_a_data72 //|> o
+  ,sc2mac_wt_a_data73 //|> o
+  ,sc2mac_wt_a_data74 //|> o
+  ,sc2mac_wt_a_data75 //|> o
+  ,sc2mac_wt_a_data76 //|> o
+  ,sc2mac_wt_a_data77 //|> o
+  ,sc2mac_wt_a_data78 //|> o
+  ,sc2mac_wt_a_data79 //|> o
+  ,sc2mac_wt_a_data8 //|> o
+  ,sc2mac_wt_a_data80 //|> o
+  ,sc2mac_wt_a_data81 //|> o
+  ,sc2mac_wt_a_data82 //|> o
+  ,sc2mac_wt_a_data83 //|> o
+  ,sc2mac_wt_a_data84 //|> o
+  ,sc2mac_wt_a_data85 //|> o
+  ,sc2mac_wt_a_data86 //|> o
+  ,sc2mac_wt_a_data87 //|> o
+  ,sc2mac_wt_a_data88 //|> o
+  ,sc2mac_wt_a_data89 //|> o
+  ,sc2mac_wt_a_data9 //|> o
+  ,sc2mac_wt_a_data90 //|> o
+  ,sc2mac_wt_a_data91 //|> o
+  ,sc2mac_wt_a_data92 //|> o
+  ,sc2mac_wt_a_data93 //|> o
+  ,sc2mac_wt_a_data94 //|> o
+  ,sc2mac_wt_a_data95 //|> o
+  ,sc2mac_wt_a_data96 //|> o
+  ,sc2mac_wt_a_data97 //|> o
+  ,sc2mac_wt_a_data98 //|> o
+  ,sc2mac_wt_a_data99 //|> o
+  ,sc2mac_wt_a_mask //|> o
+  ,sc2mac_wt_a_pvld //|> o
+  ,sc2mac_wt_a_sel //|> o
+  ,sc2mac_wt_b_data0 //|> o
+  ,sc2mac_wt_b_data1 //|> o
+  ,sc2mac_wt_b_data10 //|> o
+  ,sc2mac_wt_b_data100 //|> o
+  ,sc2mac_wt_b_data101 //|> o
+  ,sc2mac_wt_b_data102 //|> o
+  ,sc2mac_wt_b_data103 //|> o
+  ,sc2mac_wt_b_data104 //|> o
+  ,sc2mac_wt_b_data105 //|> o
+  ,sc2mac_wt_b_data106 //|> o
+  ,sc2mac_wt_b_data107 //|> o
+  ,sc2mac_wt_b_data108 //|> o
+  ,sc2mac_wt_b_data109 //|> o
+  ,sc2mac_wt_b_data11 //|> o
+  ,sc2mac_wt_b_data110 //|> o
+  ,sc2mac_wt_b_data111 //|> o
+  ,sc2mac_wt_b_data112 //|> o
+  ,sc2mac_wt_b_data113 //|> o
+  ,sc2mac_wt_b_data114 //|> o
+  ,sc2mac_wt_b_data115 //|> o
+  ,sc2mac_wt_b_data116 //|> o
+  ,sc2mac_wt_b_data117 //|> o
+  ,sc2mac_wt_b_data118 //|> o
+  ,sc2mac_wt_b_data119 //|> o
+  ,sc2mac_wt_b_data12 //|> o
+  ,sc2mac_wt_b_data120 //|> o
+  ,sc2mac_wt_b_data121 //|> o
+  ,sc2mac_wt_b_data122 //|> o
+  ,sc2mac_wt_b_data123 //|> o
+  ,sc2mac_wt_b_data124 //|> o
+  ,sc2mac_wt_b_data125 //|> o
+  ,sc2mac_wt_b_data126 //|> o
+  ,sc2mac_wt_b_data127 //|> o
+  ,sc2mac_wt_b_data13 //|> o
+  ,sc2mac_wt_b_data14 //|> o
+  ,sc2mac_wt_b_data15 //|> o
+  ,sc2mac_wt_b_data16 //|> o
+  ,sc2mac_wt_b_data17 //|> o
+  ,sc2mac_wt_b_data18 //|> o
+  ,sc2mac_wt_b_data19 //|> o
+  ,sc2mac_wt_b_data2 //|> o
+  ,sc2mac_wt_b_data20 //|> o
+  ,sc2mac_wt_b_data21 //|> o
+  ,sc2mac_wt_b_data22 //|> o
+  ,sc2mac_wt_b_data23 //|> o
+  ,sc2mac_wt_b_data24 //|> o
+  ,sc2mac_wt_b_data25 //|> o
+  ,sc2mac_wt_b_data26 //|> o
+  ,sc2mac_wt_b_data27 //|> o
+  ,sc2mac_wt_b_data28 //|> o
+  ,sc2mac_wt_b_data29 //|> o
+  ,sc2mac_wt_b_data3 //|> o
+  ,sc2mac_wt_b_data30 //|> o
+  ,sc2mac_wt_b_data31 //|> o
+  ,sc2mac_wt_b_data32 //|> o
+  ,sc2mac_wt_b_data33 //|> o
+  ,sc2mac_wt_b_data34 //|> o
+  ,sc2mac_wt_b_data35 //|> o
+  ,sc2mac_wt_b_data36 //|> o
+  ,sc2mac_wt_b_data37 //|> o
+  ,sc2mac_wt_b_data38 //|> o
+  ,sc2mac_wt_b_data39 //|> o
+  ,sc2mac_wt_b_data4 //|> o
+  ,sc2mac_wt_b_data40 //|> o
+  ,sc2mac_wt_b_data41 //|> o
+  ,sc2mac_wt_b_data42 //|> o
+  ,sc2mac_wt_b_data43 //|> o
+  ,sc2mac_wt_b_data44 //|> o
+  ,sc2mac_wt_b_data45 //|> o
+  ,sc2mac_wt_b_data46 //|> o
+  ,sc2mac_wt_b_data47 //|> o
+  ,sc2mac_wt_b_data48 //|> o
+  ,sc2mac_wt_b_data49 //|> o
+  ,sc2mac_wt_b_data5 //|> o
+  ,sc2mac_wt_b_data50 //|> o
+  ,sc2mac_wt_b_data51 //|> o
+  ,sc2mac_wt_b_data52 //|> o
+  ,sc2mac_wt_b_data53 //|> o
+  ,sc2mac_wt_b_data54 //|> o
+  ,sc2mac_wt_b_data55 //|> o
+  ,sc2mac_wt_b_data56 //|> o
+  ,sc2mac_wt_b_data57 //|> o
+  ,sc2mac_wt_b_data58 //|> o
+  ,sc2mac_wt_b_data59 //|> o
+  ,sc2mac_wt_b_data6 //|> o
+  ,sc2mac_wt_b_data60 //|> o
+  ,sc2mac_wt_b_data61 //|> o
+  ,sc2mac_wt_b_data62 //|> o
+  ,sc2mac_wt_b_data63 //|> o
+  ,sc2mac_wt_b_data64 //|> o
+  ,sc2mac_wt_b_data65 //|> o
+  ,sc2mac_wt_b_data66 //|> o
+  ,sc2mac_wt_b_data67 //|> o
+  ,sc2mac_wt_b_data68 //|> o
+  ,sc2mac_wt_b_data69 //|> o
+  ,sc2mac_wt_b_data7 //|> o
+  ,sc2mac_wt_b_data70 //|> o
+  ,sc2mac_wt_b_data71 //|> o
+  ,sc2mac_wt_b_data72 //|> o
+  ,sc2mac_wt_b_data73 //|> o
+  ,sc2mac_wt_b_data74 //|> o
+  ,sc2mac_wt_b_data75 //|> o
+  ,sc2mac_wt_b_data76 //|> o
+  ,sc2mac_wt_b_data77 //|> o
+  ,sc2mac_wt_b_data78 //|> o
+  ,sc2mac_wt_b_data79 //|> o
+  ,sc2mac_wt_b_data8 //|> o
+  ,sc2mac_wt_b_data80 //|> o
+  ,sc2mac_wt_b_data81 //|> o
+  ,sc2mac_wt_b_data82 //|> o
+  ,sc2mac_wt_b_data83 //|> o
+  ,sc2mac_wt_b_data84 //|> o
+  ,sc2mac_wt_b_data85 //|> o
+  ,sc2mac_wt_b_data86 //|> o
+  ,sc2mac_wt_b_data87 //|> o
+  ,sc2mac_wt_b_data88 //|> o
+  ,sc2mac_wt_b_data89 //|> o
+  ,sc2mac_wt_b_data9 //|> o
+  ,sc2mac_wt_b_data90 //|> o
+  ,sc2mac_wt_b_data91 //|> o
+  ,sc2mac_wt_b_data92 //|> o
+  ,sc2mac_wt_b_data93 //|> o
+  ,sc2mac_wt_b_data94 //|> o
+  ,sc2mac_wt_b_data95 //|> o
+  ,sc2mac_wt_b_data96 //|> o
+  ,sc2mac_wt_b_data97 //|> o
+  ,sc2mac_wt_b_data98 //|> o
+  ,sc2mac_wt_b_data99 //|> o
+  ,sc2mac_wt_b_mask //|> o
+  ,sc2mac_wt_b_pvld //|> o
+  ,sc2mac_wt_b_sel //|> o
+  );
+//
+// NV_NVDLA_csc_ports.v
+//
+input nvdla_core_clk; /* sc2cdma_dat_pending, sc2cdma_wt_pending, accu2sc_credit, cdma2sc_dat_pending, cdma2sc_wt_pending, csb2csc_req, csc2csb_resp, dat_up_cdma2sc, dat_up_sc2cdma, sc2buf_dat_rd_nvdla_ram_addr_ADDR_WIDTH_12_BE_1, sc2buf_dat_rd_nvdla_ram_data_valid_DATA_WIDTH_1024_ECC_SIZE_1, sc2buf_wmb_rd_nvdla_ram_addr_ADDR_WIDTH_8_BE_1, sc2buf_wmb_rd_nvdla_ram_data_valid_DATA_WIDTH_1024_ECC_SIZE_1, sc2buf_wt_rd_nvdla_ram_addr_ADDR_WIDTH_12_BE_1, sc2buf_wt_rd_nvdla_ram_data_valid_DATA_WIDTH_1024_ECC_SIZE_1, sc2mac_dat_a, sc2mac_dat_b, sc2mac_wt_a, sc2mac_wt_b, wt_up_cdma2sc, wt_up_sc2cdma */
+input nvdla_core_rstn; /* sc2cdma_dat_pending, sc2cdma_wt_pending, accu2sc_credit, cdma2sc_dat_pending, cdma2sc_wt_pending, csb2csc_req, csc2csb_resp, dat_up_cdma2sc, dat_up_sc2cdma, sc2buf_dat_rd_nvdla_ram_addr_ADDR_WIDTH_12_BE_1, sc2buf_dat_rd_nvdla_ram_data_valid_DATA_WIDTH_1024_ECC_SIZE_1, sc2buf_wmb_rd_nvdla_ram_addr_ADDR_WIDTH_8_BE_1, sc2buf_wmb_rd_nvdla_ram_data_valid_DATA_WIDTH_1024_ECC_SIZE_1, sc2buf_wt_rd_nvdla_ram_addr_ADDR_WIDTH_12_BE_1, sc2buf_wt_rd_nvdla_ram_data_valid_DATA_WIDTH_1024_ECC_SIZE_1, sc2mac_dat_a, sc2mac_dat_b, sc2mac_wt_a, sc2mac_wt_b, wt_up_cdma2sc, wt_up_sc2cdma */
+output sc2cdma_dat_pending_req;
+output sc2cdma_wt_pending_req;
+input accu2sc_credit_vld; /* data valid */
+input [2:0] accu2sc_credit_size;
+input cdma2sc_dat_pending_ack;
+input cdma2sc_wt_pending_ack;
+input csb2csc_req_pvld; /* data valid */
+output csb2csc_req_prdy; /* data return handshake */
+input [62:0] csb2csc_req_pd;
+output csc2csb_resp_valid; /* data valid */
+output [33:0] csc2csb_resp_pd; /* pkt_id_width=1 pkt_widths=33,33  */
+input cdma2sc_dat_updt; /* data valid */
+input [11:0] cdma2sc_dat_entries;
+input [11:0] cdma2sc_dat_slices;
+output sc2cdma_dat_updt; /* data valid */
+output [11:0] sc2cdma_dat_entries;
+output [11:0] sc2cdma_dat_slices;
+input [31:0] pwrbus_ram_pd;
+output sc2buf_dat_rd_en; /* data valid */
+output [11:0] sc2buf_dat_rd_addr;
+input sc2buf_dat_rd_valid; /* data valid */
+input [1023:0] sc2buf_dat_rd_data;
+output sc2buf_wmb_rd_en; /* data valid */
+output [7:0] sc2buf_wmb_rd_addr;
+input sc2buf_wmb_rd_valid; /* data valid */
+input [1023:0] sc2buf_wmb_rd_data;
+output sc2buf_wt_rd_en; /* data valid */
+output [11:0] sc2buf_wt_rd_addr;
+input sc2buf_wt_rd_valid; /* data valid */
+input [1023:0] sc2buf_wt_rd_data;
+output sc2mac_dat_a_pvld; /* data valid */
+output [127:0] sc2mac_dat_a_mask;
+output [7:0] sc2mac_dat_a_data0;
+output [7:0] sc2mac_dat_a_data1;
+output [7:0] sc2mac_dat_a_data2;
+output [7:0] sc2mac_dat_a_data3;
+output [7:0] sc2mac_dat_a_data4;
+output [7:0] sc2mac_dat_a_data5;
+output [7:0] sc2mac_dat_a_data6;
+output [7:0] sc2mac_dat_a_data7;
+output [7:0] sc2mac_dat_a_data8;
+output [7:0] sc2mac_dat_a_data9;
+output [7:0] sc2mac_dat_a_data10;
+output [7:0] sc2mac_dat_a_data11;
+output [7:0] sc2mac_dat_a_data12;
+output [7:0] sc2mac_dat_a_data13;
+output [7:0] sc2mac_dat_a_data14;
+output [7:0] sc2mac_dat_a_data15;
+output [7:0] sc2mac_dat_a_data16;
+output [7:0] sc2mac_dat_a_data17;
+output [7:0] sc2mac_dat_a_data18;
+output [7:0] sc2mac_dat_a_data19;
+output [7:0] sc2mac_dat_a_data20;
+output [7:0] sc2mac_dat_a_data21;
+output [7:0] sc2mac_dat_a_data22;
+output [7:0] sc2mac_dat_a_data23;
+output [7:0] sc2mac_dat_a_data24;
+output [7:0] sc2mac_dat_a_data25;
+output [7:0] sc2mac_dat_a_data26;
+output [7:0] sc2mac_dat_a_data27;
+output [7:0] sc2mac_dat_a_data28;
+output [7:0] sc2mac_dat_a_data29;
+output [7:0] sc2mac_dat_a_data30;
+output [7:0] sc2mac_dat_a_data31;
+output [7:0] sc2mac_dat_a_data32;
+output [7:0] sc2mac_dat_a_data33;
+output [7:0] sc2mac_dat_a_data34;
+output [7:0] sc2mac_dat_a_data35;
+output [7:0] sc2mac_dat_a_data36;
+output [7:0] sc2mac_dat_a_data37;
+output [7:0] sc2mac_dat_a_data38;
+output [7:0] sc2mac_dat_a_data39;
+output [7:0] sc2mac_dat_a_data40;
+output [7:0] sc2mac_dat_a_data41;
+output [7:0] sc2mac_dat_a_data42;
+output [7:0] sc2mac_dat_a_data43;
+output [7:0] sc2mac_dat_a_data44;
+output [7:0] sc2mac_dat_a_data45;
+output [7:0] sc2mac_dat_a_data46;
+output [7:0] sc2mac_dat_a_data47;
+output [7:0] sc2mac_dat_a_data48;
+output [7:0] sc2mac_dat_a_data49;
+output [7:0] sc2mac_dat_a_data50;
+output [7:0] sc2mac_dat_a_data51;
+output [7:0] sc2mac_dat_a_data52;
+output [7:0] sc2mac_dat_a_data53;
+output [7:0] sc2mac_dat_a_data54;
+output [7:0] sc2mac_dat_a_data55;
+output [7:0] sc2mac_dat_a_data56;
+output [7:0] sc2mac_dat_a_data57;
+output [7:0] sc2mac_dat_a_data58;
+output [7:0] sc2mac_dat_a_data59;
+output [7:0] sc2mac_dat_a_data60;
+output [7:0] sc2mac_dat_a_data61;
+output [7:0] sc2mac_dat_a_data62;
+output [7:0] sc2mac_dat_a_data63;
+output [7:0] sc2mac_dat_a_data64;
+output [7:0] sc2mac_dat_a_data65;
+output [7:0] sc2mac_dat_a_data66;
+output [7:0] sc2mac_dat_a_data67;
+output [7:0] sc2mac_dat_a_data68;
+output [7:0] sc2mac_dat_a_data69;
+output [7:0] sc2mac_dat_a_data70;
+output [7:0] sc2mac_dat_a_data71;
+output [7:0] sc2mac_dat_a_data72;
+output [7:0] sc2mac_dat_a_data73;
+output [7:0] sc2mac_dat_a_data74;
+output [7:0] sc2mac_dat_a_data75;
+output [7:0] sc2mac_dat_a_data76;
+output [7:0] sc2mac_dat_a_data77;
+output [7:0] sc2mac_dat_a_data78;
+output [7:0] sc2mac_dat_a_data79;
+output [7:0] sc2mac_dat_a_data80;
+output [7:0] sc2mac_dat_a_data81;
+output [7:0] sc2mac_dat_a_data82;
+output [7:0] sc2mac_dat_a_data83;
+output [7:0] sc2mac_dat_a_data84;
+output [7:0] sc2mac_dat_a_data85;
+output [7:0] sc2mac_dat_a_data86;
+output [7:0] sc2mac_dat_a_data87;
+output [7:0] sc2mac_dat_a_data88;
+output [7:0] sc2mac_dat_a_data89;
+output [7:0] sc2mac_dat_a_data90;
+output [7:0] sc2mac_dat_a_data91;
+output [7:0] sc2mac_dat_a_data92;
+output [7:0] sc2mac_dat_a_data93;
+output [7:0] sc2mac_dat_a_data94;
+output [7:0] sc2mac_dat_a_data95;
+output [7:0] sc2mac_dat_a_data96;
+output [7:0] sc2mac_dat_a_data97;
+output [7:0] sc2mac_dat_a_data98;
+output [7:0] sc2mac_dat_a_data99;
+output [7:0] sc2mac_dat_a_data100;
+output [7:0] sc2mac_dat_a_data101;
+output [7:0] sc2mac_dat_a_data102;
+output [7:0] sc2mac_dat_a_data103;
+output [7:0] sc2mac_dat_a_data104;
+output [7:0] sc2mac_dat_a_data105;
+output [7:0] sc2mac_dat_a_data106;
+output [7:0] sc2mac_dat_a_data107;
+output [7:0] sc2mac_dat_a_data108;
+output [7:0] sc2mac_dat_a_data109;
+output [7:0] sc2mac_dat_a_data110;
+output [7:0] sc2mac_dat_a_data111;
+output [7:0] sc2mac_dat_a_data112;
+output [7:0] sc2mac_dat_a_data113;
+output [7:0] sc2mac_dat_a_data114;
+output [7:0] sc2mac_dat_a_data115;
+output [7:0] sc2mac_dat_a_data116;
+output [7:0] sc2mac_dat_a_data117;
+output [7:0] sc2mac_dat_a_data118;
+output [7:0] sc2mac_dat_a_data119;
+output [7:0] sc2mac_dat_a_data120;
+output [7:0] sc2mac_dat_a_data121;
+output [7:0] sc2mac_dat_a_data122;
+output [7:0] sc2mac_dat_a_data123;
+output [7:0] sc2mac_dat_a_data124;
+output [7:0] sc2mac_dat_a_data125;
+output [7:0] sc2mac_dat_a_data126;
+output [7:0] sc2mac_dat_a_data127;
+output [8:0] sc2mac_dat_a_pd;
+output sc2mac_dat_b_pvld; /* data valid */
+output [127:0] sc2mac_dat_b_mask;
+output [7:0] sc2mac_dat_b_data0;
+output [7:0] sc2mac_dat_b_data1;
+output [7:0] sc2mac_dat_b_data2;
+output [7:0] sc2mac_dat_b_data3;
+output [7:0] sc2mac_dat_b_data4;
+output [7:0] sc2mac_dat_b_data5;
+output [7:0] sc2mac_dat_b_data6;
+output [7:0] sc2mac_dat_b_data7;
+output [7:0] sc2mac_dat_b_data8;
+output [7:0] sc2mac_dat_b_data9;
+output [7:0] sc2mac_dat_b_data10;
+output [7:0] sc2mac_dat_b_data11;
+output [7:0] sc2mac_dat_b_data12;
+output [7:0] sc2mac_dat_b_data13;
+output [7:0] sc2mac_dat_b_data14;
+output [7:0] sc2mac_dat_b_data15;
+output [7:0] sc2mac_dat_b_data16;
+output [7:0] sc2mac_dat_b_data17;
+output [7:0] sc2mac_dat_b_data18;
+output [7:0] sc2mac_dat_b_data19;
+output [7:0] sc2mac_dat_b_data20;
+output [7:0] sc2mac_dat_b_data21;
+output [7:0] sc2mac_dat_b_data22;
+output [7:0] sc2mac_dat_b_data23;
+output [7:0] sc2mac_dat_b_data24;
+output [7:0] sc2mac_dat_b_data25;
+output [7:0] sc2mac_dat_b_data26;
+output [7:0] sc2mac_dat_b_data27;
+output [7:0] sc2mac_dat_b_data28;
+output [7:0] sc2mac_dat_b_data29;
+output [7:0] sc2mac_dat_b_data30;
+output [7:0] sc2mac_dat_b_data31;
+output [7:0] sc2mac_dat_b_data32;
+output [7:0] sc2mac_dat_b_data33;
+output [7:0] sc2mac_dat_b_data34;
+output [7:0] sc2mac_dat_b_data35;
+output [7:0] sc2mac_dat_b_data36;
+output [7:0] sc2mac_dat_b_data37;
+output [7:0] sc2mac_dat_b_data38;
+output [7:0] sc2mac_dat_b_data39;
+output [7:0] sc2mac_dat_b_data40;
+output [7:0] sc2mac_dat_b_data41;
+output [7:0] sc2mac_dat_b_data42;
+output [7:0] sc2mac_dat_b_data43;
+output [7:0] sc2mac_dat_b_data44;
+output [7:0] sc2mac_dat_b_data45;
+output [7:0] sc2mac_dat_b_data46;
+output [7:0] sc2mac_dat_b_data47;
+output [7:0] sc2mac_dat_b_data48;
+output [7:0] sc2mac_dat_b_data49;
+output [7:0] sc2mac_dat_b_data50;
+output [7:0] sc2mac_dat_b_data51;
+output [7:0] sc2mac_dat_b_data52;
+output [7:0] sc2mac_dat_b_data53;
+output [7:0] sc2mac_dat_b_data54;
+output [7:0] sc2mac_dat_b_data55;
+output [7:0] sc2mac_dat_b_data56;
+output [7:0] sc2mac_dat_b_data57;
+output [7:0] sc2mac_dat_b_data58;
+output [7:0] sc2mac_dat_b_data59;
+output [7:0] sc2mac_dat_b_data60;
+output [7:0] sc2mac_dat_b_data61;
+output [7:0] sc2mac_dat_b_data62;
+output [7:0] sc2mac_dat_b_data63;
+output [7:0] sc2mac_dat_b_data64;
+output [7:0] sc2mac_dat_b_data65;
+output [7:0] sc2mac_dat_b_data66;
+output [7:0] sc2mac_dat_b_data67;
+output [7:0] sc2mac_dat_b_data68;
+output [7:0] sc2mac_dat_b_data69;
+output [7:0] sc2mac_dat_b_data70;
+output [7:0] sc2mac_dat_b_data71;
+output [7:0] sc2mac_dat_b_data72;
+output [7:0] sc2mac_dat_b_data73;
+output [7:0] sc2mac_dat_b_data74;
+output [7:0] sc2mac_dat_b_data75;
+output [7:0] sc2mac_dat_b_data76;
+output [7:0] sc2mac_dat_b_data77;
+output [7:0] sc2mac_dat_b_data78;
+output [7:0] sc2mac_dat_b_data79;
+output [7:0] sc2mac_dat_b_data80;
+output [7:0] sc2mac_dat_b_data81;
+output [7:0] sc2mac_dat_b_data82;
+output [7:0] sc2mac_dat_b_data83;
+output [7:0] sc2mac_dat_b_data84;
+output [7:0] sc2mac_dat_b_data85;
+output [7:0] sc2mac_dat_b_data86;
+output [7:0] sc2mac_dat_b_data87;
+output [7:0] sc2mac_dat_b_data88;
+output [7:0] sc2mac_dat_b_data89;
+output [7:0] sc2mac_dat_b_data90;
+output [7:0] sc2mac_dat_b_data91;
+output [7:0] sc2mac_dat_b_data92;
+output [7:0] sc2mac_dat_b_data93;
+output [7:0] sc2mac_dat_b_data94;
+output [7:0] sc2mac_dat_b_data95;
+output [7:0] sc2mac_dat_b_data96;
+output [7:0] sc2mac_dat_b_data97;
+output [7:0] sc2mac_dat_b_data98;
+output [7:0] sc2mac_dat_b_data99;
+output [7:0] sc2mac_dat_b_data100;
+output [7:0] sc2mac_dat_b_data101;
+output [7:0] sc2mac_dat_b_data102;
+output [7:0] sc2mac_dat_b_data103;
+output [7:0] sc2mac_dat_b_data104;
+output [7:0] sc2mac_dat_b_data105;
+output [7:0] sc2mac_dat_b_data106;
+output [7:0] sc2mac_dat_b_data107;
+output [7:0] sc2mac_dat_b_data108;
+output [7:0] sc2mac_dat_b_data109;
+output [7:0] sc2mac_dat_b_data110;
+output [7:0] sc2mac_dat_b_data111;
+output [7:0] sc2mac_dat_b_data112;
+output [7:0] sc2mac_dat_b_data113;
+output [7:0] sc2mac_dat_b_data114;
+output [7:0] sc2mac_dat_b_data115;
+output [7:0] sc2mac_dat_b_data116;
+output [7:0] sc2mac_dat_b_data117;
+output [7:0] sc2mac_dat_b_data118;
+output [7:0] sc2mac_dat_b_data119;
+output [7:0] sc2mac_dat_b_data120;
+output [7:0] sc2mac_dat_b_data121;
+output [7:0] sc2mac_dat_b_data122;
+output [7:0] sc2mac_dat_b_data123;
+output [7:0] sc2mac_dat_b_data124;
+output [7:0] sc2mac_dat_b_data125;
+output [7:0] sc2mac_dat_b_data126;
+output [7:0] sc2mac_dat_b_data127;
+output [8:0] sc2mac_dat_b_pd;
+output sc2mac_wt_a_pvld; /* data valid */
+output [127:0] sc2mac_wt_a_mask;
+output [7:0] sc2mac_wt_a_data0;
+output [7:0] sc2mac_wt_a_data1;
+output [7:0] sc2mac_wt_a_data2;
+output [7:0] sc2mac_wt_a_data3;
+output [7:0] sc2mac_wt_a_data4;
+output [7:0] sc2mac_wt_a_data5;
+output [7:0] sc2mac_wt_a_data6;
+output [7:0] sc2mac_wt_a_data7;
+output [7:0] sc2mac_wt_a_data8;
+output [7:0] sc2mac_wt_a_data9;
+output [7:0] sc2mac_wt_a_data10;
+output [7:0] sc2mac_wt_a_data11;
+output [7:0] sc2mac_wt_a_data12;
+output [7:0] sc2mac_wt_a_data13;
+output [7:0] sc2mac_wt_a_data14;
+output [7:0] sc2mac_wt_a_data15;
+output [7:0] sc2mac_wt_a_data16;
+output [7:0] sc2mac_wt_a_data17;
+output [7:0] sc2mac_wt_a_data18;
+output [7:0] sc2mac_wt_a_data19;
+output [7:0] sc2mac_wt_a_data20;
+output [7:0] sc2mac_wt_a_data21;
+output [7:0] sc2mac_wt_a_data22;
+output [7:0] sc2mac_wt_a_data23;
+output [7:0] sc2mac_wt_a_data24;
+output [7:0] sc2mac_wt_a_data25;
+output [7:0] sc2mac_wt_a_data26;
+output [7:0] sc2mac_wt_a_data27;
+output [7:0] sc2mac_wt_a_data28;
+output [7:0] sc2mac_wt_a_data29;
+output [7:0] sc2mac_wt_a_data30;
+output [7:0] sc2mac_wt_a_data31;
+output [7:0] sc2mac_wt_a_data32;
+output [7:0] sc2mac_wt_a_data33;
+output [7:0] sc2mac_wt_a_data34;
+output [7:0] sc2mac_wt_a_data35;
+output [7:0] sc2mac_wt_a_data36;
+output [7:0] sc2mac_wt_a_data37;
+output [7:0] sc2mac_wt_a_data38;
+output [7:0] sc2mac_wt_a_data39;
+output [7:0] sc2mac_wt_a_data40;
+output [7:0] sc2mac_wt_a_data41;
+output [7:0] sc2mac_wt_a_data42;
+output [7:0] sc2mac_wt_a_data43;
+output [7:0] sc2mac_wt_a_data44;
+output [7:0] sc2mac_wt_a_data45;
+output [7:0] sc2mac_wt_a_data46;
+output [7:0] sc2mac_wt_a_data47;
+output [7:0] sc2mac_wt_a_data48;
+output [7:0] sc2mac_wt_a_data49;
+output [7:0] sc2mac_wt_a_data50;
+output [7:0] sc2mac_wt_a_data51;
+output [7:0] sc2mac_wt_a_data52;
+output [7:0] sc2mac_wt_a_data53;
+output [7:0] sc2mac_wt_a_data54;
+output [7:0] sc2mac_wt_a_data55;
+output [7:0] sc2mac_wt_a_data56;
+output [7:0] sc2mac_wt_a_data57;
+output [7:0] sc2mac_wt_a_data58;
+output [7:0] sc2mac_wt_a_data59;
+output [7:0] sc2mac_wt_a_data60;
+output [7:0] sc2mac_wt_a_data61;
+output [7:0] sc2mac_wt_a_data62;
+output [7:0] sc2mac_wt_a_data63;
+output [7:0] sc2mac_wt_a_data64;
+output [7:0] sc2mac_wt_a_data65;
+output [7:0] sc2mac_wt_a_data66;
+output [7:0] sc2mac_wt_a_data67;
+output [7:0] sc2mac_wt_a_data68;
+output [7:0] sc2mac_wt_a_data69;
+output [7:0] sc2mac_wt_a_data70;
+output [7:0] sc2mac_wt_a_data71;
+output [7:0] sc2mac_wt_a_data72;
+output [7:0] sc2mac_wt_a_data73;
+output [7:0] sc2mac_wt_a_data74;
+output [7:0] sc2mac_wt_a_data75;
+output [7:0] sc2mac_wt_a_data76;
+output [7:0] sc2mac_wt_a_data77;
+output [7:0] sc2mac_wt_a_data78;
+output [7:0] sc2mac_wt_a_data79;
+output [7:0] sc2mac_wt_a_data80;
+output [7:0] sc2mac_wt_a_data81;
+output [7:0] sc2mac_wt_a_data82;
+output [7:0] sc2mac_wt_a_data83;
+output [7:0] sc2mac_wt_a_data84;
+output [7:0] sc2mac_wt_a_data85;
+output [7:0] sc2mac_wt_a_data86;
+output [7:0] sc2mac_wt_a_data87;
+output [7:0] sc2mac_wt_a_data88;
+output [7:0] sc2mac_wt_a_data89;
+output [7:0] sc2mac_wt_a_data90;
+output [7:0] sc2mac_wt_a_data91;
+output [7:0] sc2mac_wt_a_data92;
+output [7:0] sc2mac_wt_a_data93;
+output [7:0] sc2mac_wt_a_data94;
+output [7:0] sc2mac_wt_a_data95;
+output [7:0] sc2mac_wt_a_data96;
+output [7:0] sc2mac_wt_a_data97;
+output [7:0] sc2mac_wt_a_data98;
+output [7:0] sc2mac_wt_a_data99;
+output [7:0] sc2mac_wt_a_data100;
+output [7:0] sc2mac_wt_a_data101;
+output [7:0] sc2mac_wt_a_data102;
+output [7:0] sc2mac_wt_a_data103;
+output [7:0] sc2mac_wt_a_data104;
+output [7:0] sc2mac_wt_a_data105;
+output [7:0] sc2mac_wt_a_data106;
+output [7:0] sc2mac_wt_a_data107;
+output [7:0] sc2mac_wt_a_data108;
+output [7:0] sc2mac_wt_a_data109;
+output [7:0] sc2mac_wt_a_data110;
+output [7:0] sc2mac_wt_a_data111;
+output [7:0] sc2mac_wt_a_data112;
+output [7:0] sc2mac_wt_a_data113;
+output [7:0] sc2mac_wt_a_data114;
+output [7:0] sc2mac_wt_a_data115;
+output [7:0] sc2mac_wt_a_data116;
+output [7:0] sc2mac_wt_a_data117;
+output [7:0] sc2mac_wt_a_data118;
+output [7:0] sc2mac_wt_a_data119;
+output [7:0] sc2mac_wt_a_data120;
+output [7:0] sc2mac_wt_a_data121;
+output [7:0] sc2mac_wt_a_data122;
+output [7:0] sc2mac_wt_a_data123;
+output [7:0] sc2mac_wt_a_data124;
+output [7:0] sc2mac_wt_a_data125;
+output [7:0] sc2mac_wt_a_data126;
+output [7:0] sc2mac_wt_a_data127;
+output [7:0] sc2mac_wt_a_sel;
+output sc2mac_wt_b_pvld; /* data valid */
+output [127:0] sc2mac_wt_b_mask;
+output [7:0] sc2mac_wt_b_data0;
+output [7:0] sc2mac_wt_b_data1;
+output [7:0] sc2mac_wt_b_data2;
+output [7:0] sc2mac_wt_b_data3;
+output [7:0] sc2mac_wt_b_data4;
+output [7:0] sc2mac_wt_b_data5;
+output [7:0] sc2mac_wt_b_data6;
+output [7:0] sc2mac_wt_b_data7;
+output [7:0] sc2mac_wt_b_data8;
+output [7:0] sc2mac_wt_b_data9;
+output [7:0] sc2mac_wt_b_data10;
+output [7:0] sc2mac_wt_b_data11;
+output [7:0] sc2mac_wt_b_data12;
+output [7:0] sc2mac_wt_b_data13;
+output [7:0] sc2mac_wt_b_data14;
+output [7:0] sc2mac_wt_b_data15;
+output [7:0] sc2mac_wt_b_data16;
+output [7:0] sc2mac_wt_b_data17;
+output [7:0] sc2mac_wt_b_data18;
+output [7:0] sc2mac_wt_b_data19;
+output [7:0] sc2mac_wt_b_data20;
+output [7:0] sc2mac_wt_b_data21;
+output [7:0] sc2mac_wt_b_data22;
+output [7:0] sc2mac_wt_b_data23;
+output [7:0] sc2mac_wt_b_data24;
+output [7:0] sc2mac_wt_b_data25;
+output [7:0] sc2mac_wt_b_data26;
+output [7:0] sc2mac_wt_b_data27;
+output [7:0] sc2mac_wt_b_data28;
+output [7:0] sc2mac_wt_b_data29;
+output [7:0] sc2mac_wt_b_data30;
+output [7:0] sc2mac_wt_b_data31;
+output [7:0] sc2mac_wt_b_data32;
+output [7:0] sc2mac_wt_b_data33;
+output [7:0] sc2mac_wt_b_data34;
+output [7:0] sc2mac_wt_b_data35;
+output [7:0] sc2mac_wt_b_data36;
+output [7:0] sc2mac_wt_b_data37;
+output [7:0] sc2mac_wt_b_data38;
+output [7:0] sc2mac_wt_b_data39;
+output [7:0] sc2mac_wt_b_data40;
+output [7:0] sc2mac_wt_b_data41;
+output [7:0] sc2mac_wt_b_data42;
+output [7:0] sc2mac_wt_b_data43;
+output [7:0] sc2mac_wt_b_data44;
+output [7:0] sc2mac_wt_b_data45;
+output [7:0] sc2mac_wt_b_data46;
+output [7:0] sc2mac_wt_b_data47;
+output [7:0] sc2mac_wt_b_data48;
+output [7:0] sc2mac_wt_b_data49;
+output [7:0] sc2mac_wt_b_data50;
+output [7:0] sc2mac_wt_b_data51;
+output [7:0] sc2mac_wt_b_data52;
+output [7:0] sc2mac_wt_b_data53;
+output [7:0] sc2mac_wt_b_data54;
+output [7:0] sc2mac_wt_b_data55;
+output [7:0] sc2mac_wt_b_data56;
+output [7:0] sc2mac_wt_b_data57;
+output [7:0] sc2mac_wt_b_data58;
+output [7:0] sc2mac_wt_b_data59;
+output [7:0] sc2mac_wt_b_data60;
+output [7:0] sc2mac_wt_b_data61;
+output [7:0] sc2mac_wt_b_data62;
+output [7:0] sc2mac_wt_b_data63;
+output [7:0] sc2mac_wt_b_data64;
+output [7:0] sc2mac_wt_b_data65;
+output [7:0] sc2mac_wt_b_data66;
+output [7:0] sc2mac_wt_b_data67;
+output [7:0] sc2mac_wt_b_data68;
+output [7:0] sc2mac_wt_b_data69;
+output [7:0] sc2mac_wt_b_data70;
+output [7:0] sc2mac_wt_b_data71;
+output [7:0] sc2mac_wt_b_data72;
+output [7:0] sc2mac_wt_b_data73;
+output [7:0] sc2mac_wt_b_data74;
+output [7:0] sc2mac_wt_b_data75;
+output [7:0] sc2mac_wt_b_data76;
+output [7:0] sc2mac_wt_b_data77;
+output [7:0] sc2mac_wt_b_data78;
+output [7:0] sc2mac_wt_b_data79;
+output [7:0] sc2mac_wt_b_data80;
+output [7:0] sc2mac_wt_b_data81;
+output [7:0] sc2mac_wt_b_data82;
+output [7:0] sc2mac_wt_b_data83;
+output [7:0] sc2mac_wt_b_data84;
+output [7:0] sc2mac_wt_b_data85;
+output [7:0] sc2mac_wt_b_data86;
+output [7:0] sc2mac_wt_b_data87;
+output [7:0] sc2mac_wt_b_data88;
+output [7:0] sc2mac_wt_b_data89;
+output [7:0] sc2mac_wt_b_data90;
+output [7:0] sc2mac_wt_b_data91;
+output [7:0] sc2mac_wt_b_data92;
+output [7:0] sc2mac_wt_b_data93;
+output [7:0] sc2mac_wt_b_data94;
+output [7:0] sc2mac_wt_b_data95;
+output [7:0] sc2mac_wt_b_data96;
+output [7:0] sc2mac_wt_b_data97;
+output [7:0] sc2mac_wt_b_data98;
+output [7:0] sc2mac_wt_b_data99;
+output [7:0] sc2mac_wt_b_data100;
+output [7:0] sc2mac_wt_b_data101;
+output [7:0] sc2mac_wt_b_data102;
+output [7:0] sc2mac_wt_b_data103;
+output [7:0] sc2mac_wt_b_data104;
+output [7:0] sc2mac_wt_b_data105;
+output [7:0] sc2mac_wt_b_data106;
+output [7:0] sc2mac_wt_b_data107;
+output [7:0] sc2mac_wt_b_data108;
+output [7:0] sc2mac_wt_b_data109;
+output [7:0] sc2mac_wt_b_data110;
+output [7:0] sc2mac_wt_b_data111;
+output [7:0] sc2mac_wt_b_data112;
+output [7:0] sc2mac_wt_b_data113;
+output [7:0] sc2mac_wt_b_data114;
+output [7:0] sc2mac_wt_b_data115;
+output [7:0] sc2mac_wt_b_data116;
+output [7:0] sc2mac_wt_b_data117;
+output [7:0] sc2mac_wt_b_data118;
+output [7:0] sc2mac_wt_b_data119;
+output [7:0] sc2mac_wt_b_data120;
+output [7:0] sc2mac_wt_b_data121;
+output [7:0] sc2mac_wt_b_data122;
+output [7:0] sc2mac_wt_b_data123;
+output [7:0] sc2mac_wt_b_data124;
+output [7:0] sc2mac_wt_b_data125;
+output [7:0] sc2mac_wt_b_data126;
+output [7:0] sc2mac_wt_b_data127;
+output [7:0] sc2mac_wt_b_sel;
+input cdma2sc_wt_updt; /* data valid */
+input [13:0] cdma2sc_wt_kernels;
+input [11:0] cdma2sc_wt_entries;
+input [8:0] cdma2sc_wmb_entries;
+output sc2cdma_wt_updt; /* data valid */
+output [13:0] sc2cdma_wt_kernels;
+output [11:0] sc2cdma_wt_entries;
+output [8:0] sc2cdma_wmb_entries;
+input dla_clk_ovr_on_sync;
+input global_clk_ovr_on_sync;
+input tmc2slcg_disable_clock_gating;
+wire dp2reg_done;
+wire nvdla_op_gated_clk_0;
+wire nvdla_op_gated_clk_1;
+wire nvdla_op_gated_clk_2;
+wire nvdla_wg_gated_clk;
+wire [20:0] reg2dp_atomics;
+wire [4:0] reg2dp_batches;
+wire [0:0] reg2dp_conv_mode;
+wire [2:0] reg2dp_conv_x_stride_ext;
+wire [2:0] reg2dp_conv_y_stride_ext;
+wire [31:0] reg2dp_cya;
+wire [3:0] reg2dp_data_bank;
+wire [0:0] reg2dp_data_reuse;
+wire [12:0] reg2dp_datain_channel_ext;
+wire [0:0] reg2dp_datain_format;
+wire [12:0] reg2dp_datain_height_ext;
+wire [12:0] reg2dp_datain_width_ext;
+wire [12:0] reg2dp_dataout_channel;
+wire [12:0] reg2dp_dataout_height;
+wire [12:0] reg2dp_dataout_width;
+wire [11:0] reg2dp_entries;
+wire [1:0] reg2dp_in_precision;
+wire [0:0] reg2dp_op_en;
+wire [4:0] reg2dp_pad_left;
+wire [4:0] reg2dp_pad_top;
+wire [15:0] reg2dp_pad_value;
+wire [1:0] reg2dp_pra_truncate;
+wire [1:0] reg2dp_proc_precision;
+wire [11:0] reg2dp_rls_slices;
+wire [0:0] reg2dp_skip_data_rls;
+wire [0:0] reg2dp_skip_weight_rls;
+wire [3:0] reg2dp_weight_bank;
+wire [24:0] reg2dp_weight_bytes;
+wire [12:0] reg2dp_weight_channel_ext;
+wire [0:0] reg2dp_weight_format;
+wire [4:0] reg2dp_weight_height_ext;
+wire [12:0] reg2dp_weight_kernel;
+wire [0:0] reg2dp_weight_reuse;
+wire [4:0] reg2dp_weight_width_ext;
+wire [20:0] reg2dp_wmb_bytes;
+wire [4:0] reg2dp_x_dilation_ext;
+wire [4:0] reg2dp_y_dilation_ext;
+wire [1:0] reg2dp_y_extension;
+wire [1:0] sc_state;
+wire [30:0] sg2dl_pd;
+wire sg2dl_pvld;
+wire sg2dl_reuse_rls;
+wire [17:0] sg2wl_pd;
+wire sg2wl_pvld;
+wire sg2wl_reuse_rls;
+wire [3:0] slcg_op_en;
+wire slcg_wg_en;
+
+endmodule

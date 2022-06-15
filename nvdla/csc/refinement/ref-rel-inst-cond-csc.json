@@ -1,0 +1,62 @@
+{
+  "instructions": [
+    {
+      "instruction" : "Set_Producer",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "Set_Bank_Group0",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "Set_Bank_Group1",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "Set_Start_Group0",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "Set_Start_Group1",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "Start",
+      "ready bound" : 4
+    },
+
+    {
+      "instruction" : "Pend2Busy",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "Data_Output",
+      "ready bound" : 21
+    },
+    {
+      "instruction" : "Weight_Output",
+      "ready bound" : 21
+    },
+    {
+      "instruction" : "Busy2Done",
+      "ready bound" : 1
+    },
+    {
+      "instruction" : "Done2Idle_0",
+      "ready bound" : 1
+    },
+    {
+      "instruction" : "Done2Idle_1",
+      "ready bound" : 1
+    }
+  ],
+  
+  "global invariants": []
+
+}

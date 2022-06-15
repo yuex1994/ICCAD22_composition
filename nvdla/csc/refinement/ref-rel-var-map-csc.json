@@ -1,0 +1,81 @@
+{
+    "models": { "ILA":"m0" , "VERILOG": "m1" },
+  
+    "state mapping": {
+
+        //Config States
+        "s_producer" : "m1.u_regfile.reg2dp_producer",
+        // [["__START__", "m1.u_regfile.u_single_reg.nvdla_csc_s_pointer_0_wren ? m1.u_regfile.req_wdat[0] : m1.u_regfile.reg2dp_producer"], 
+        //                 ["__IEND__", "m1.u_regfile.reg2dp_producer"]],
+        "s_consumer" : "m1.u_regfile.dp2reg_consumer",
+
+        "group0_d_op_en_trigger" : "m1.u_regfile.reg2dp_d0_op_en", 
+        "group1_d_op_en_trigger" : "m1.u_regfile.reg2dp_d1_op_en",
+
+        "group0_d_data_bank" : "m1.u_regfile.reg2dp_d0_data_bank",
+        "group0_d_weight_bank" : "m1.u_regfile.reg2dp_d0_weight_bank",
+        "group1_d_data_bank" : "m1.u_regfile.reg2dp_d1_data_bank",
+        "group1_d_weight_bank" : "m1.u_regfile.reg2dp_d1_weight_bank",
+
+        // Output
+        "data_valid" : "m1.sc2mac_dat_a_pvld || m1.sc2mac_dat_b_pvld",
+        "weight_valid" : "m1.sc2mac_wt_a_pvld || m1.sc2mac_wt_b_pvld",
+        "csb_rdy" : "m1.csb2csc_req_prdy",
+
+        // Internal States
+        "csc_state": [["__START__", "#sc_state_original#"],["__IEND__", "#sc_state_update#"]],
+        "last_weight_bank" : "m1.u_sg.last_weight_bank",
+        "last_data_bank": "m1.u_sg.last_data_bank"
+
+    },
+
+    "value-holder":{
+        "sc_state_original" :{
+            "cond": "__START__",
+            "val" : "m1.u_sg.cur_state",
+            "width": 2
+          },
+
+        "sc_state_update" :{
+            "cond": "m1.u_sg.cur_state == sc_state_original & m1.u_sg.cur_state != m1.u_sg.nxt_state",
+            "val" : "m1.u_sg.nxt_state",
+            "width": 2
+          }
+    },
+
+    "verilog-inline-monitors" : {
+    },
+
+    "interface mapping": {
+       
+        "nvdla_core_clk" : "**CLOCK**",
+        "nvdla_core_rstn" : "**NRESET**",
+
+        "csb2csc_req_pvld"  : "**KEEP**",
+        "csb2csc_req_prdy"  : "**SO**",
+        "csb2csc_req_pd"  : "**KEEP**",
+        
+        "sc2mac_dat_a_pvld" : "**SO**",
+        "sc2mac_dat_b_pvld" : "**SO**",
+        "sc2mac_wt_a_pvld" : "**SO**",
+        "sc2mac_wt_b_pvld" : "**SO**"
+    },
+  
+    "mapping control":[
+        "m1.u_regfile.req_pd[54:0] == {m0.csb_write, m0.csb_data, m0.csb_addr}",
+        "m1.u_regfile.req_pvld == m0.csb_vld",
+        "m0.done == m1.dp2reg_done",
+        "m0.pending_clr == m1.u_sg.pending_done",
+        "m0.fifo_clr == m1.u_sg.layer_done & m1.u_sg.fifo_is_clear & ~m1.u_sg.pkg_vld",
+        "m0.sg2dl_vld == m1.sg2dl_pvld",
+        "m0.sg2wt_vld == m1.sg2wl_pvld"
+    ],
+  
+    "assumptions" : [
+    ],
+
+    "composition checks" : [
+        
+    ]
+  
+}
