@@ -1,0 +1,33 @@
+{
+  "instructions": [
+    {
+      "instruction" : "compute",
+      "ready bound" : 8
+    },
+    {
+      "instruction" : "set pointer",
+      "ready bound" : 2
+    },
+    {
+      "instruction" : "set op_enable_0",
+      "ready bound" : 2
+    },
+    // {
+    //   "instruction" : "set cfg_0",
+    //   "ready bound" : 2
+    // },
+    {
+      "instruction" : "set op_enable_1",
+      "ready bound" : 2
+    },
+    {
+      "instruction" : "set cfg_1",
+      "ready bound" : 2
+    }
+    
+  ],
+  
+  "global invariants": []
+
+}
+
