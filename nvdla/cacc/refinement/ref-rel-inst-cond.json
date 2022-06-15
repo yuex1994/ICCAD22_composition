@@ -1,0 +1,100 @@
+{
+  "instructions": [
+    {
+      "instruction" : "compute",
+      "ready bound" : 14
+    },
+    {
+      "instruction" : "set pointer",
+      "ready bound" : 2
+    },
+    {
+      "instruction" : "set op_enable_0",
+      "ready bound" : 2
+    },
+    {
+      "instruction" : "set op_enable_1",
+      "ready bound" : 2
+    },
+    {
+      "instruction" : "set cfg_0",
+      "ready bound" : 2
+    },
+    {
+      "instruction" : "set cfg_1",
+      "ready bound" : 2
+    },
+    {
+      "instruction" : "set dataout_size_00",
+      "ready bound" : 2
+    },
+    {
+      "instruction" : "set dataout_size_01",
+      "ready bound" : 2
+    },
+    {
+      "instruction" : "set dataout_size_10",
+      "ready bound" : 2
+    },
+    {
+      "instruction" : "set dataout_size_11",
+      "ready bound" : 2
+    },
+    {
+      "instruction" : "set dataout_addr_0",
+      "ready bound" : 2
+    },
+    {
+      "instruction" : "set dataout_addr_1",
+      "ready bound" : 2
+    },
+    {
+      "instruction" : "set batch_number_1",
+      "ready bound" : 2
+    },
+    {
+      "instruction" : "set batch_number_0",
+      "ready bound" : 2
+    },
+    {
+      "instruction" : "set line_stride_0",
+      "ready bound" : 2
+    },   
+    {
+      "instruction" : "set line_stride_1",
+      "ready bound" : 2
+    },       
+    {
+      "instruction" : "set surf_stride_0",
+      "ready bound" : 2
+    },       
+    {
+      "instruction" : "set surf_stride_1",
+      "ready bound" : 2
+    },       
+    {
+      "instruction" : "set dataout_map_0",
+      "ready bound" : 2
+    },       
+    {
+      "instruction" : "set dataout_map_1",
+      "ready bound" : 2
+    },       
+    {
+      "instruction" : "set clip_cfg_0",
+      "ready bound" : 2
+    },       
+    {
+      "instruction" : "set clip_cfg_1",
+      "ready bound" : 2
+    },
+    {
+      "instruction" : "send_credit",
+      "ready bound" : 1
+    }
+  ],
+  
+  "global invariants": []
+
+}
+
